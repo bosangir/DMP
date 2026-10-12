@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Management Plans: Pre-class Reading</title>
+<meta name="description" content="Pre-class reading on Data Management Plans (DMPs) and the research data lifecycle for the Research Data Management course, Master of Epidemiology, University of Antwerp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfaf7; --surface:#ffffff; --surface-2:#f2f0ea; --text:#1d2329; --muted:#5a6570;
+  --line:#dedad0; --accent:#0f6b6b; --accent-soft:#e1efee; --accent-2:#b5523b; --accent-2-soft:#f6e6e1;
+  --gold:#a8790f; --gold-soft:#f5ecd6; --link:#0d5f8a; --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14181c; --surface:#1b2026; --surface-2:#232a31; --text:#e6e9ec; --muted:#9aa5af;
+    --line:#2f3841; --accent:#4fb3b0; --accent-soft:#1d3434; --accent-2:#e08a73; --accent-2-soft:#3a2622;
+    --gold:#d9ae4c; --gold-soft:#352c18; --link:#7cc0e8; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14181c; --surface:#1b2026; --surface-2:#232a31; --text:#e6e9ec; --muted:#9aa5af;
+  --line:#2f3841; --accent:#4fb3b0; --accent-soft:#1d3434; --accent-2:#e08a73; --accent-2-soft:#3a2622;
+  --gold:#d9ae4c; --gold-soft:#352c18; --link:#7cc0e8; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 "Source Serif 4",Georgia,serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.sans,nav,table,.tag,.btn,figcaption,.callout-title,summary,.meta{font-family:Inter,system-ui,sans-serif}
+a{color:var(--link);text-underline-offset:2px}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+header.hero{border-bottom:1px solid var(--line);background:var(--surface)}
+.hero .wrap{padding-top:56px;padding-bottom:44px}
+.eyebrow{font:600 13px/1.2 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+h1{font-size:clamp(32px,5vw,50px);line-height:1.1;margin:0 0 16px;letter-spacing:-.02em;max-width:22ch}
+.lede{font-size:20px;color:var(--muted);max-width:62ch;margin:0 0 24px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:var(--muted)}
+.meta b{color:var(--text);font-weight:600}
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:56px;padding-top:40px;padding-bottom:80px}
+nav.toc{position:sticky;top:20px;align-self:start;font-size:14px;max-height:calc(100vh - 40px);overflow:auto}
+nav.toc p{font-weight:600;text-transform:uppercase;letter-spacing:.07em;font-size:12px;color:var(--muted);margin:0 0 10px}
+nav.toc ol{list-style:none;margin:0;padding:0;counter-reset:t}
+nav.toc li{counter-increment:t}
+nav.toc a{display:flex;gap:10px;padding:6px 10px;border-left:2px solid var(--line);color:var(--muted);text-decoration:none}
+nav.toc a::before{content:counter(t,decimal-leading-zero);color:var(--line);font-variant-numeric:tabular-nums}
+nav.toc a:hover,nav.toc a.active{color:var(--text);border-left-color:var(--accent)}
+nav.toc a.active::before{color:var(--accent)}
+.theme-toggle{margin-top:18px;font:500 13px Inter,sans-serif;background:var(--surface);color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:6px 10px;cursor:pointer}
+main{min-width:0}
+section{padding-top:8px;margin-bottom:56px;scroll-margin-top:16px}
+h2{font-size:28px;line-height:1.2;letter-spacing:-.01em;margin:0 0 6px}
+h2 .num{color:var(--accent);margin-right:10px;font-variant-numeric:tabular-nums}
+.sub{color:var(--muted);font-size:18px;margin:0 0 22px}
+h3{font-size:19px;margin:32px 0 8px}
+p{margin:0 0 16px;max-width:72ch}
+ul,ol{max-width:70ch;padding-left:22px}
+li{margin-bottom:6px}
+sup.cite a{font:600 11px Inter,sans-serif;text-decoration:none;padding:0 2px;color:var(--accent)}
+.callout{border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--surface);border-radius:8px;padding:16px 20px;margin:22px 0;box-shadow:var(--shadow);max-width:76ch}
+.callout.warn{border-left-color:var(--accent-2)}
+.callout.gold{border-left-color:var(--gold)}
+.callout-title{font-weight:600;font-size:14px;margin:0 0 6px;color:var(--accent)}
+.callout.warn .callout-title{color:var(--accent-2)}
+.callout.gold .callout-title{color:var(--gold)}
+.callout p:last-child,.callout ul:last-child{margin-bottom:0}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow)}
+.card h4{margin:0 0 6px;font-size:15px}
+.card p{font-size:15.5px;margin:0;color:var(--muted)}
+figure{margin:28px 0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:var(--shadow)}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:13px;color:var(--muted);margin-top:12px;line-height:1.5}
+.tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5}
+th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--line)}
+th{background:var(--surface-2);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:600}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.tag.red{background:var(--accent-2-soft);color:var(--accent-2)}
+.tag.gold{background:var(--gold-soft);color:var(--gold)}
+.sections{counter-reset:s;display:grid;gap:14px;margin:20px 0}
+.sec{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;box-shadow:var(--shadow)}
+.sec .n{font:700 26px/1 Inter,sans-serif;color:var(--accent)}
+.sec h4{font-size:17px;margin:0 0 6px}
+.sec p{font-size:15.5px;margin:0 0 8px}
+.sec .ex{font-size:14.5px;background:var(--surface-2);border-radius:6px;padding:10px 12px;margin-top:8px}
+.sec .ex b{font-family:Inter,sans-serif;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.checklist{list-style:none;padding:0;max-width:72ch}
+.checklist li{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);margin-bottom:8px}
+.checklist input{margin-top:6px;width:18px;height:18px;accent-color:var(--accent);flex:none}
+.checklist label{cursor:pointer}
+.checklist input:checked + label{color:var(--muted);text-decoration:line-through}
+details{border:1px solid var(--line);border-radius:8px;background:var(--surface);margin-bottom:10px;max-width:76ch}
+summary{cursor:pointer;padding:12px 16px;font-weight:600;font-size:15px;list-style:none;display:flex;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";color:var(--accent);font-weight:700;width:12px}
+details[open] summary::before{content:"–"}
+details .ans{padding:0 16px 14px 38px;font-size:15.5px}
+details .ans p{margin-bottom:8px}
+dl.gloss{display:grid;grid-template-columns:minmax(150px,220px) minmax(0,1fr);gap:10px 22px;max-width:80ch}
+dl.gloss dt{font:600 15px Inter,sans-serif}
+dl.gloss dd{margin:0;font-size:15.5px;color:var(--muted)}
+ol.refs{font-size:14.5px;line-height:1.55;max-width:none;padding-left:28px}
+ol.refs li{margin-bottom:10px;scroll-margin-top:16px}
+ol.refs li:target{background:var(--gold-soft);border-radius:4px}
+footer{border-top:1px solid var(--line);font:14px/1.6 Inter,sans-serif;color:var(--muted);padding:28px 0 44px}
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:20px}
+  nav.toc{position:static;max-height:none;border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--surface)}
+  .g3{grid-template-columns:minmax(0,1fr)}
+  .g2{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .lede{font-size:18px}
+  .sec{grid-template-columns:minmax(0,1fr);gap:6px}
+  dl.gloss{grid-template-columns:minmax(0,1fr);gap:2px}
+  dl.gloss dd{margin-bottom:10px}
+}
+@media print{nav.toc,.theme-toggle{display:none}.layout{display:block}body{background:#fff}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Pre-class reading · Research Data Management</p>
+    <h1>The Data Management Plan, and the lifecycle behind it</h1>
+    <p class="lede">What a DMP is, why funders and universities ask for one, how it changes over the life of a project, and how to write one in DMPonline.be. Read this before the DMP session; it is also the starting point for your group project.</p>
+    <div class="meta">
+      <span><b>Course</b> Master of Epidemiology (MEPI), University of Antwerp, 2026–27</span>
+      <span><b>Reading time</b> about 30 minutes</span>
+      <span><b>Last checked</b> 12 October 2026</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <p>Contents</p>
+    <ol>
+      <li><a href="#goals">Before you start</a></li>
+      <li><a href="#what">What is a DMP?</a></li>
+      <li><a href="#why">Why write one?</a></li>
+      <li><a href="#lifecycle">The research data lifecycle</a></li>
+      <li><a href="#dmp-lifecycle">The DMP lifecycle</a></li>
+      <li><a href="#funders">Who asks for what</a></li>
+      <li><a href="#contents">What goes in a DMP</a></li>
+      <li><a href="#fair">FAIR, open and GDPR</a></li>
+      <li><a href="#dmponline">Using DMPonline.be</a></li>
+      <li><a href="#institutions">UAntwerp, UHasselt, KU Leuven</a></li>
+      <li><a href="#tips">Writing a good DMP</a></li>
+      <li><a href="#prepare">Before class: checklist</a></li>
+      <li><a href="#quiz">Check yourself</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+      <li><a href="#refs">Sources</a></li>
+    </ol>
+    <button class="theme-toggle" type="button" id="themeToggle">Switch light / dark</button>
+  </nav>
+
+  <main>
+
+  <!-- 1 -->
+  <section id="goals">
+    <h2><span class="num">01</span>Before you start</h2>
+    <p class="sub">What you should be able to do after reading this page.</p>
+    <div class="grid g2">
+      <div class="card"><h4>Explain</h4><p>What a Data Management Plan is and why it is called a <em>living document</em>.</p></div>
+      <div class="card"><h4>Describe</h4><p>The stages of the research data lifecycle and which DMP section belongs to each stage.</p></div>
+      <div class="card"><h4>Recognise</h4><p>The DMP stages that FWO, BOF, BELSPO and Horizon Europe ask for, and their deadlines.</p></div>
+      <div class="card"><h4>Start</h4><p>A plan in DMPonline.be, so that your group can work on its DMP project from the first session.</p></div>
+    </div>
+    <div class="callout gold">
+      <p class="callout-title">Why this matters for your grade</p>
+      <p>Half of this course is a group project in which you write a Data Management Plan for a study, in groups of about five. A good DMP is specific: it names systems, people and numbers, justifies each choice, and links those choices to FAIR and the GDPR. Keep this in mind as you read.</p>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section id="what">
+    <h2><span class="num">02</span>What is a Data Management Plan?</h2>
+    <p class="sub">A written plan for your data before, during and after the project.</p>
+    <p>The University of Antwerp describes a DMP as a formal document, required by most research funders, that covers three things: the data a project will generate or reuse, how those data will be handled during the project, and how they will be preserved and shared afterwards.<sup class="cite"><a href="#r1">[1]</a></sup> KU Leuven adds that a DMP works as an <em>RDM checklist</em> for your project, and that by the end of the project it should record what data were produced, where they are stored, how they can be accessed and how they may be reused.<sup class="cite"><a href="#r7">[7]</a></sup></p>
+    <p>The Digital Curation Centre (DCC) in the UK, whose software DMPonline.be is built on, uses a slightly wider term: a <em>data management and sharing plan</em>. In its words, such a plan explains how data will be created, managed, shared and preserved, and justifies any restrictions on access.<sup class="cite"><a href="#r11">[11]</a></sup></p>
+
+    <div class="grid g3">
+      <div class="card"><h4>① Before</h4><p>Which data will you collect or reuse? In what format and volume? Is ethics approval or a DPIA needed?</p></div>
+      <div class="card"><h4>② During</h4><p>Where are the data stored and backed up? Who has access? How are files named, versioned and documented?</p></div>
+      <div class="card"><h4>③ After</h4><p>What will you keep, for how long, and where? What can be shared, with whom, and under which licence?</p></div>
+    </div>
+
+    <h3>A living document</h3>
+    <p>Every source used here makes the same point: a DMP is not written once and filed away. UHasselt calls it "a living document" that records your intentions and is updated as the project runs.<sup class="cite"><a href="#r4">[4]</a></sup> UAntwerp asks you to update it regularly, based on what you learn during the project.<sup class="cite"><a href="#r1">[1]</a></sup> In practice, plans change: a new data source is added, the ethics committee asks for extra protection, or a partner wants a data-sharing agreement. The DMP should follow those changes.</p>
+
+    <div class="callout warn">
+      <p class="callout-title">A DMP is not a place to store data</p>
+      <p>UHasselt's guidance says this directly: the DMP describes your data and how you handle them; it does not contain the data themselves.<sup class="cite"><a href="#r4">[4]</a></sup> Never paste participant data, names or identifiers into a DMP.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section id="why">
+    <h2><span class="num">03</span>Why write one?</h2>
+    <p class="sub">Funders require it, but the main benefit is to you and your team.</p>
+    <p>UAntwerp lists three reasons to plan your data management:<sup class="cite"><a href="#r1">[1]</a></sup></p>
+    <ol>
+      <li><strong>Know the requirements.</strong> Funders, journals, the university and the law (for example the GDPR) all have rules about data. Planning shows you early whether you need ethics clearance, a Data Protection Impact Assessment (DPIA), contracts with partners or a patent check.</li>
+      <li><strong>Plan the work.</strong> Thinking ahead about file names, versions, README files, metadata, repositories and licences saves time later. It also protects the project if a team member leaves.</li>
+      <li><strong>Get more out of your research.</strong> Well-documented, shared data can be cited, reused and built on.</li>
+    </ol>
+    <p>The DCC adds that planning reduces duplicated effort, makes it easier for others to validate your published results, and shows funders that your project fits their data policies.<sup class="cite"><a href="#r11">[11]</a></sup> UHasselt notes that it lowers the risk of losing data or mixing up versions.<sup class="cite"><a href="#r4">[4]</a></sup></p>
+    <div class="callout">
+      <p class="callout-title">An epidemiology example</p>
+      <p>Imagine a tuberculosis cohort in which the data manager leaves halfway through follow-up. Without a plan, nobody knows which spreadsheet is the current one, where the pseudonymisation key is kept, or which variables were recoded. A DMP that names a storage location, a folder structure, a codebook and a backup person avoids exactly this situation.</p>
+    </div>
+    <p>Data management also costs money: storage beyond what the university provides, licensed software, encryption tools or a data manager's time. UAntwerp treats these as normal research costs that belong in the project budget, and points to the UK Data Service costing tool to estimate them.<sup class="cite"><a href="#r1">[1]</a></sup></p>
+  </section>
+
+  <!-- 4 -->
+  <section id="lifecycle">
+    <h2><span class="num">04</span>The research data lifecycle</h2>
+    <p class="sub">Data pass through stages. The DMP is how you plan each one.</p>
+    <p>Research data management is usually described as a cycle. Different institutions draw it slightly differently, but the stages are much the same. The UAntwerp RDM pages, for example, are organised as collecting, processing, storage and backup, preservation, sharing, licensing and reuse.<sup class="cite"><a href="#r2">[2]</a></sup> KU Leuven's guidance follows the same path, from documentation and storage during the project to preservation and sharing at the end.<sup class="cite"><a href="#r6">[6]</a></sup> In this course we use six stages, with two things that run through all of them.</p>
+
+    <figure>
+      <svg viewBox="0 0 720 470" role="img" aria-labelledby="lcTitle lcDesc">
+        <title id="lcTitle">The research data lifecycle</title>
+        <desc id="lcDesc">Six stages in a cycle: Plan, Collect, Process and analyse, Preserve and archive, Share, Reuse. Documentation and security apply at every stage.</desc>
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/>
+          </marker>
+        </defs>
+        <circle cx="360" cy="235" r="165" fill="none" stroke="var(--line)" stroke-width="2" stroke-dasharray="4 6"/>
+        <!-- arrows between nodes along the circle -->
+        <g fill="none" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#arr)">
+          <path d="M 434 76 Q 505 88 528 128"/>
+          <path d="M 546 195 L 546 276"/>
+          <path d="M 528 344 Q 505 386 436 398"/>
+          <path d="M 284 398 Q 215 386 192 344"/>
+          <path d="M 174 278 L 174 197"/>
+          <path d="M 192 130 Q 215 88 284 76"/>
+        </g>
+        <!-- centre -->
+        <circle cx="360" cy="235" r="88" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="360" y="222" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="var(--accent)">Documentation</text>
+        <text x="360" y="241" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="var(--accent)">&amp; security</text>
+        <text x="360" y="262" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="var(--muted)">at every stage</text>
+        <!-- nodes: positioned at 60° steps, starting top -->
+        <g font-family="Inter,sans-serif" text-anchor="middle">
+          <g>
+            <rect x="290" y="44" width="140" height="56" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="2"/>
+            <text x="360" y="68" font-size="15" font-weight="700" fill="var(--text)">1 · Plan</text>
+            <text x="360" y="88" font-size="11.5" fill="var(--muted)">write the DMP</text>
+          </g>
+          <g>
+            <rect x="476" y="135" width="140" height="56" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="546" y="159" font-size="15" font-weight="700" fill="var(--text)">2 · Collect</text>
+            <text x="546" y="179" font-size="11.5" fill="var(--muted)">consent, tools, formats</text>
+          </g>
+          <g>
+            <rect x="476" y="282" width="140" height="56" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="546" y="306" font-size="15" font-weight="700" fill="var(--text)">3 · Process</text>
+            <text x="546" y="326" font-size="11.5" fill="var(--muted)">clean, analyse, check</text>
+          </g>
+          <g>
+            <rect x="290" y="372" width="140" height="56" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="360" y="396" font-size="15" font-weight="700" fill="var(--text)">4 · Preserve</text>
+            <text x="360" y="416" font-size="11.5" fill="var(--muted)">stable formats, archive</text>
+          </g>
+          <g>
+            <rect x="104" y="282" width="140" height="56" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="174" y="306" font-size="15" font-weight="700" fill="var(--text)">5 · Share</text>
+            <text x="174" y="326" font-size="11.5" fill="var(--muted)">repository, licence</text>
+          </g>
+          <g>
+            <rect x="104" y="135" width="140" height="56" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="174" y="159" font-size="15" font-weight="700" fill="var(--text)">6 · Reuse</text>
+            <text x="174" y="179" font-size="11.5" fill="var(--muted)">by you and by others</text>
+          </g>
+        </g>
+      </svg>
+      <figcaption>The research data lifecycle as used in this course. Reuse feeds back into planning: reused data become the input of a new project, and a new DMP. Stages adapted from the UAntwerp, KU Leuven and UK Data Service RDM guidance.<sup class="cite"><a href="#r2">[2]</a><a href="#r6">[6]</a><a href="#r14">[14]</a></sup></figcaption>
+    </figure>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Stage</th><th>Typical questions</th><th>Where it goes in your DMP</th></tr></thead>
+        <tbody>
+          <tr><td>1 · Plan</td><td>What data, how much, from where? Who is responsible? What will it cost? Do I need ethics approval or a DPIA?</td><td>All sections; especially <em>Responsibilities &amp; resources</em> and <em>Legal &amp; ethical</em></td></tr>
+          <tr><td>2 · Collect</td><td>Which tool (REDCap, KoboToolbox, paper CRF)? Which formats? Does the consent form cover storage, sharing and reuse?</td><td><em>Data description &amp; collection</em></td></tr>
+          <tr><td>3 · Process</td><td>How are raw data protected from editing? How is cleaning documented? Which codebook, metadata standard, quality checks?</td><td><em>Documentation &amp; data quality</em>; <em>Storage &amp; backup</em></td></tr>
+          <tr><td>4 · Preserve</td><td>Which data are kept, in which open formats, for how long, and in which archive?</td><td><em>Sharing &amp; long-term preservation</em></td></tr>
+          <tr><td>5 · Share</td><td>Which repository? Open, restricted or closed access? Which licence? Is a data-sharing agreement needed?</td><td><em>Sharing &amp; long-term preservation</em>; <em>Legal &amp; ethical</em></td></tr>
+          <tr><td>6 · Reuse</td><td>Can someone else understand and cite the data? Are they findable with a persistent identifier (DOI)?</td><td><em>Documentation</em>; <em>Sharing</em></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Documentation (README files, codebooks, metadata) and security (access rights, encryption, backups) are not one-off steps. They apply from the first questionnaire to the final deposit, which is why they sit in the centre of the diagram.</p>
+  </section>
+
+  <!-- 5 -->
+  <section id="dmp-lifecycle">
+    <h2><span class="num">05</span>The DMP lifecycle</h2>
+    <p class="sub">A DMP has versions, and each one has a deadline and an audience.</p>
+    <p>Not only the data have a lifecycle; the plan does too. For most Flemish funders the DMP passes through four versions.<sup class="cite"><a href="#r3">[3]</a><a href="#r4">[4]</a><a href="#r9">[9]</a></sup></p>
+
+    <figure>
+      <svg viewBox="0 0 760 250" role="img" aria-labelledby="dlTitle dlDesc">
+        <title id="dlTitle">The DMP lifecycle</title>
+        <desc id="dlDesc">Four versions of a DMP over time: application DMP at the grant proposal, initial full DMP within six months of the project start, updates during the project, and the final DMP with the final report.</desc>
+        <line x1="40" y1="92" x2="720" y2="92" stroke="var(--line)" stroke-width="3"/>
+        <path d="M712,84 L726,92 L712,100 z" fill="var(--line)"/>
+        <g font-family="Inter,sans-serif">
+          <circle cx="110" cy="92" r="15" fill="var(--accent-2)"/>
+          <text x="110" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">1</text>
+          <text x="110" y="52" text-anchor="middle" font-size="12" fill="var(--muted)">Grant proposal</text>
+          <text x="110" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">Application DMP</text>
+          <text x="110" y="154" text-anchor="middle" font-size="12" fill="var(--muted)">a few short questions</text>
+          <text x="110" y="171" text-anchor="middle" font-size="12" fill="var(--muted)">read by the review panel</text>
+
+          <circle cx="290" cy="92" r="15" fill="var(--accent)"/>
+          <text x="290" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">2</text>
+          <text x="290" y="52" text-anchor="middle" font-size="12" fill="var(--muted)">≤ 6 months after start</text>
+          <text x="290" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">Initial full DMP</text>
+          <text x="290" y="154" text-anchor="middle" font-size="12" fill="var(--muted)">complete template</text>
+          <text x="290" y="171" text-anchor="middle" font-size="12" fill="var(--muted)">sent to RDM team / funder</text>
+
+          <circle cx="470" cy="92" r="15" fill="var(--accent)"/>
+          <text x="470" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">3</text>
+          <text x="470" y="52" text-anchor="middle" font-size="12" fill="var(--muted)">During the project</text>
+          <text x="470" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">Updates</text>
+          <text x="470" y="154" text-anchor="middle" font-size="12" fill="var(--muted)">whenever practice changes</text>
+          <text x="470" y="171" text-anchor="middle" font-size="12" fill="var(--muted)">version number + date</text>
+
+          <circle cx="650" cy="92" r="15" fill="var(--gold)"/>
+          <text x="650" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">4</text>
+          <text x="650" y="52" text-anchor="middle" font-size="12" fill="var(--muted)">End of project</text>
+          <text x="650" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">Final DMP</text>
+          <text x="650" y="154" text-anchor="middle" font-size="12" fill="var(--muted)">what was actually done</text>
+          <text x="650" y="171" text-anchor="middle" font-size="12" fill="var(--muted)">attached to final report</text>
+        </g>
+        <text x="380" y="222" text-anchor="middle" font-family="Inter,sans-serif" font-size="12.5" fill="var(--muted)">From intention (version 1) to an accurate record of what was done (version 4)</text>
+      </svg>
+      <figcaption>The four versions of a DMP for Flemish funders such as FWO and BOF. Deadlines differ between funders and programmes; see the next section. Based on FWO, UAntwerp, UHasselt and KU Leuven guidance.<sup class="cite"><a href="#r9">[9]</a><a href="#r3">[3]</a><a href="#r4">[4]</a><a href="#r8">[8]</a></sup></figcaption>
+    </figure>
+
+    <div class="sections">
+      <div class="sec"><div class="n">1</div><div>
+        <h4>Application DMP</h4>
+        <p>Part of the grant proposal. For FWO this is a short section of the application form with six questions about data types, preservation for at least five years, reasons to deviate, ethics and security, other issues, and who might reuse the data. Several questions have a 700-character limit, and the evaluation panel and external referees read the answers.<sup class="cite"><a href="#r9">[9]</a></sup></p>
+      </div></div>
+      <div class="sec"><div class="n">2</div><div>
+        <h4>Initial full DMP</h4>
+        <p>Written at the start of the funded project using the full template. For FWO projects, it is due within six months of the official start date and goes to the research coordination office of the main host institution, not to FWO itself; FWO may ask for it in a random check.<sup class="cite"><a href="#r9">[9]</a></sup> At UAntwerp you send it to the RDM team, who give feedback and archive it.<sup class="cite"><a href="#r3">[3]</a></sup></p>
+      </div></div>
+      <div class="sec"><div class="n">3</div><div>
+        <h4>Updates during the project</h4>
+        <p>Revise the plan whenever your practice changes, for example after advice from the ethics committee or a discussion with the technology transfer office.<sup class="cite"><a href="#r7">[7]</a></sup> UHasselt notes that you do not need to send these intermediate updates to the RDM team.<sup class="cite"><a href="#r4">[4]</a></sup></p>
+      </div></div>
+      <div class="sec"><div class="n">4</div><div>
+        <h4>Final DMP</h4>
+        <p>At the end, the DMP should describe what was actually done. For FWO it is attached to the final report and submitted through the FWO e-portal; without a detailed DMP the final report is considered incomplete.<sup class="cite"><a href="#r9">[9]</a></sup></p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section id="funders">
+    <h2><span class="num">06</span>Who asks for what</h2>
+    <p class="sub">The main funders for researchers at Flemish universities.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Funder</th><th>At application</th><th>Full DMP</th><th>At the end</th></tr></thead>
+        <tbody>
+          <tr><td>FWO<br><span class="tag">Flanders</span></td><td>Six short DMP questions in the application form</td><td>Within 6 months of start, using the Flemish standard template; submitted to the host institution</td><td>Final DMP with the final report, via the FWO e-portal</td></tr>
+          <tr><td>BOF<br><span class="tag">UAntwerp internal</span></td><td>Depends on the programme</td><td>GOA and DOCPRO: within 6 months. STIMPRO and KP: within 3 months. Submitted to the RDM team</td><td>Final DMP with the final report</td></tr>
+          <tr><td>BELSPO<br><span class="tag gold">Federal</span></td><td>Preliminary DMP with the application</td><td>Within 6 months of start, to the BELSPO programme administrator</td><td>Final DMP with the final report; data in a certified repository, preferably under CC0 or CC BY</td></tr>
+          <tr><td>Horizon Europe<br><span class="tag red">EU</span></td><td>Data management described in the proposal</td><td>A DMP deliverable within the first 6 months</td><td>Final DMP submitted to the European Commission</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:14px;color:var(--muted)">Sources: UAntwerp policies and requirements page,<sup class="cite"><a href="#r3">[3]</a></sup> FWO DMP page,<sup class="cite"><a href="#r9">[9]</a></sup> and KU Leuven DMP guidance.<sup class="cite"><a href="#r7">[7]</a></sup> Deadlines can change between calls; always check the current call text.</p>
+    <p>The FWO accountability rule is worth remembering: the supervisor (and, since 2020, also fellowship holders) remains responsible for data management, and researchers should think about their data before, during and for at least five years after the project.<sup class="cite"><a href="#r3">[3]</a></sup></p>
+    <p>Since 1 October 2022 FWO uses the <strong>Flemish Standard DMP template</strong>, developed by the Flemish Research Data Network (FRDN). The same template is used for BOF, IOF and VLAIO projects.<sup class="cite"><a href="#r9">[9]</a><a href="#r10">[10]</a></sup></p>
+  </section>
+
+  <!-- 7 -->
+  <section id="contents">
+    <h2><span class="num">07</span>What goes in a DMP</h2>
+    <p class="sub">Templates differ in wording, but they ask about the same six things.</p>
+    <p>In 2019 Science Europe, an association of European research funders, published a set of core requirements for DMPs so that funders would ask broadly the same questions.<sup class="cite"><a href="#r12">[12]</a></sup> The Flemish template, the Horizon Europe template and the DCC's guidance all cover the same ground.<sup class="cite"><a href="#r7">[7]</a><a href="#r11">[11]</a></sup> Below are the six sections, with the questions each one must answer and a short example from an epidemiological study.</p>
+
+    <div class="sections">
+      <div class="sec"><div class="n">1</div><div>
+        <h4>Data description and collection (or reuse of existing data)</h4>
+        <p>What data will you collect, generate or reuse? Which types, formats and volume? How will you collect them, and how do they relate to existing data?</p>
+        <div class="ex"><b>Example</b><br>Questionnaire data from about 600 adults with TB, collected in REDCap (≈ 50 MB, exported as CSV); sputum smear and GeneXpert results from the hospital laboratory; routine notification data reused from the national TB programme.</div>
+      </div></div>
+      <div class="sec"><div class="n">2</div><div>
+        <h4>Documentation and data quality</h4>
+        <p>Which metadata, codebook and README will accompany the data? Which standards (for example DDI, CDISC, ICD-11, LOINC)? How will you control quality during collection and cleaning?</p>
+        <div class="ex"><b>Example</b><br>The REDCap data dictionary serves as the codebook. Range checks and required fields in REDCap; cleaning done only by script in R, with a cleaning log; raw export kept read-only.</div>
+      </div></div>
+      <div class="sec"><div class="n">3</div><div>
+        <h4>Storage and backup during the project</h4>
+        <p>Where are data stored and backed up? Who has access, and how is access controlled? How are data kept secure, especially personal data?</p>
+        <div class="ex"><b>Example</b><br>Data on the university's secure network drive with automatic backup; access limited to four named team members; pseudonymisation key stored separately and encrypted; no data on personal laptops, USB sticks or email.</div>
+      </div></div>
+      <div class="sec"><div class="n">4</div><div>
+        <h4>Legal and ethical requirements, codes of conduct</h4>
+        <p>Are personal data processed under the GDPR? Is there informed consent for storage, sharing and reuse? Ethics approval? A DPIA? Who owns the data, and are agreements needed with partners?</p>
+        <div class="ex"><b>Example</b><br>Health data are a special category under GDPR Art. 9. Ethics approval from the institutional and local committees; DPIA completed with the privacy office; data transfer agreement with the partner site outside the EU.</div>
+      </div></div>
+      <div class="sec"><div class="n">5</div><div>
+        <h4>Data sharing and long-term preservation</h4>
+        <p>Which data will be kept, for how long, and where? Which data can be shared, through which repository, under which conditions and licence? Will they get a persistent identifier?</p>
+        <div class="ex"><b>Example</b><br>De-identified analysis dataset, codebook and R scripts deposited in Zenodo with a DOI under restricted access (request to the PI), kept for at least 10 years. Identifiable source data stay in the university archive and are not shared.</div>
+      </div></div>
+      <div class="sec"><div class="n">6</div><div>
+        <h4>Data management responsibilities and resources</h4>
+        <p>Who does what: collection, cleaning, backup, approval, deposit? Who takes over if someone leaves? What will data management cost in money and time?</p>
+        <div class="ex"><b>Example</b><br>PI is accountable; the study data manager runs REDCap and the weekly checks; the PhD student deposits the data at the end. Budget: €1,500 for a data manager's time and €0 for storage (institutional).</div>
+      </div></div>
+    </div>
+
+    <div class="callout">
+      <p class="callout-title">How the Flemish and Horizon Europe templates map to these sections</p>
+      <p><strong>Flemish standard template (FWO, BOF, VLAIO):</strong> data description; ethical, privacy and legal issues; documentation and metadata; storage, backup and versioning; archiving and preservation; data sharing; responsibilities.<sup class="cite"><a href="#r7">[7]</a></sup></p>
+      <p><strong>Horizon Europe:</strong> data summary; making data FAIR; allocation of resources; data security; ethics.<sup class="cite"><a href="#r7">[7]</a><a href="#r15">[15]</a></sup></p>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section id="fair">
+    <h2><span class="num">08</span>FAIR, open and GDPR</h2>
+    <p class="sub">Three ideas that most DMP questions come back to.</p>
+    <h3>The FAIR principles</h3>
+    <p>The FAIR principles were published in 2016 and are now built into most funder policies.<sup class="cite"><a href="#r13">[13]</a></sup> They describe data that are:</p>
+    <div class="grid g2">
+      <div class="card"><h4>F · Findable</h4><p>A persistent identifier (such as a DOI) and rich metadata, registered in a searchable resource.</p></div>
+      <div class="card"><h4>A · Accessible</h4><p>Retrievable by a standard protocol, with clear access conditions. Metadata stay available even if the data are no longer.</p></div>
+      <div class="card"><h4>I · Interoperable</h4><p>Open formats and shared vocabularies, so that data can be combined with other data.</p></div>
+      <div class="card"><h4>R · Reusable</h4><p>A clear licence, provenance and documentation that meets the standards of the field.</p></div>
+    </div>
+    <div class="callout gold">
+      <p class="callout-title">FAIR is not the same as open</p>
+      <p>Health data are often too sensitive to publish openly, but they can still be FAIR: the metadata can be public and findable, with access to the data granted on request under an agreement. Horizon Europe summarises this as data that are <em>"as open as possible, as closed as necessary"</em>.<sup class="cite"><a href="#r15">[15]</a></sup></p>
+    </div>
+    <h3>Personal data and the GDPR</h3>
+    <p>In epidemiology, most DMPs involve personal data. UAntwerp asks you to describe which personal or sensitive data you collect, how you pseudonymise them and where the key is kept, how you secure and how long you keep them, and whether the informed consent covers access, preservation and sharing. It advises a Data Protection Impact Assessment (DPIA) at the start of the project.<sup class="cite"><a href="#r1">[1]</a></sup> Remember that pseudonymised data are still personal data under the GDPR; only truly anonymised data fall outside it.</p>
+    <p>Two other legal points can apply to your study. If you work with genetic resources from another country, the Nagoya Protocol on access and benefit-sharing may apply.<sup class="cite"><a href="#r1">[1]</a></sup> If the project produces results that could be patented or commercialised, talk to the valorisation office before you share data.</p>
+  </section>
+
+  <!-- 9 -->
+  <section id="dmponline">
+    <h2><span class="num">09</span>Using DMPonline.be</h2>
+    <p class="sub">The Belgian tool for writing, sharing and exporting DMPs.</p>
+    <p>DMPonline.be is the Belgian instance of DMPonline, the tool developed by the Digital Curation Centre. It is run by Belnet and used by most Belgian universities, university colleges and research institutes, including UAntwerp, UHasselt, KU Leuven, UGent and UCLouvain.<sup class="cite"><a href="#r16">[16]</a></sup> The DMPbelgium consortium that set it up as a shared tool was founded in January 2017 by Ghent University, INBO, the University of Antwerp, Hasselt University, ULB, VUB and Sciensano.<sup class="cite"><a href="#r17">[17]</a></sup></p>
+    <p>The tool contains the templates of the main funders, guidance under every question (both from the funder and from your university), and options to share a plan with co-authors, request feedback and export to PDF or Word.<sup class="cite"><a href="#r4">[4]</a><a href="#r16">[16]</a></sup></p>
+
+    <h3>Step by step</h3>
+    <ol>
+      <li><strong>Log in</strong> at <a href="https://dmponline.be">dmponline.be</a>. Choose your institution (University of Antwerp) and sign in with your university account. You can also sign in with ORCID.<sup class="cite"><a href="#r16">[16]</a></sup></li>
+      <li><strong>Create a plan.</strong> Under <em>Create plans</em>, give a project title, select your organisation and select the funder. If there is no funder, or for BOF and practice plans, tick the <em>no funder</em> option to get the Flemish template.<sup class="cite"><a href="#r4">[4]</a></sup></li>
+      <li><strong>Check the guidance.</strong> Make sure your institution's guidance is ticked, so that its advice appears next to each question.<sup class="cite"><a href="#r4">[4]</a></sup></li>
+      <li><strong>Choose the right stage.</strong> Templates have separate tabs, such as <em>Application DMP</em> and <em>Full DMP</em>. Answer the one that fits the stage of your project.<sup class="cite"><a href="#r4">[4]</a></sup></li>
+      <li><strong>Write together.</strong> Use the <em>Share</em> tab to invite your group members as co-owners or editors.<sup class="cite"><a href="#r4">[4]</a></sup></li>
+      <li><strong>Request feedback</strong> from your institution's RDM team, if the option is available.<sup class="cite"><a href="#r4">[4]</a></sup></li>
+      <li><strong>Download</strong> the plan as PDF or DOCX, and keep updating it as the project develops.<sup class="cite"><a href="#r4">[4]</a></sup></li>
+    </ol>
+    <p>A user manual for DMPonline.be is maintained by the DMPbelgium consortium on GitHub.<sup class="cite"><a href="#r18">[18]</a></sup> KU Leuven reports that a new version of DMPonline.be released in September 2026 includes a validation tab; follow your own institution's instructions on whether to use it.<sup class="cite"><a href="#r7">[7]</a></sup></p>
+    <div class="callout">
+      <p class="callout-title">You don't have to use DMPonline.be, but it helps</p>
+      <p>UHasselt and FWO both accept a plan written in the Word version of the template, as long as all questions of the funder's template are answered.<sup class="cite"><a href="#r4">[4]</a><a href="#r9">[9]</a></sup> For this course we will use DMPonline.be, because it shows the guidance next to each question and makes group work easier.</p>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section id="institutions">
+    <h2><span class="num">10</span>How three Flemish universities handle DMPs</h2>
+    <p class="sub">The same funder rules, with slightly different local routes.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th></th><th>University of Antwerp</th><th>Hasselt University</th><th>KU Leuven</th></tr></thead>
+        <tbody>
+          <tr><td>Who helps</td><td>RDM team in the Research Affairs Office (RIVA)</td><td>RDM team of the University Library, plus discipline data stewards</td><td>RDM team; DMPs reviewed by the Research Coordination Office</td></tr>
+          <tr><td>Contact</td><td>rdm-support@uantwerpen.be</td><td>rdm@uhasselt.be</td><td>RDM helpdesk (web form)</td></tr>
+          <tr><td>Where to submit</td><td>Full DMP by email to the RDM team, who archive it and give feedback</td><td>PDF of the final DMP to the RDM team; to the funder where required</td><td>DMP Monitoring Tool (DMP-MT)</td></tr>
+          <tr><td>Notable</td><td>Guidance on ethics, privacy (DPIA), IP and Nagoya; budget data management as a research cost</td><td>Step-by-step DMPonline guide; DMP writing sessions in the RDM training calendar</td><td>Self-evaluation rubric to check your own DMP; example DMPs for internal use</td></tr>
+          <tr><td>Main page</td><td><a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/data-management-plan/">UAntwerp DMP page</a></td><td><a href="https://www.uhasselt.be/en/university-library/research/research-data-management/data-management">UHasselt data management</a></td><td><a href="https://www.kuleuven.be/rdm/en/guidance/dmp/dmp">KU Leuven DMP guidance</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:14px;color:var(--muted)">Sources: <a href="#r1">[1]</a> <a href="#r3">[3]</a> <a href="#r4">[4]</a> <a href="#r5">[5]</a> <a href="#r6">[6]</a> <a href="#r7">[7]</a> <a href="#r8">[8]</a>.</p>
+    <p>All three universities also have a general RDM policy that applies to every researcher, not only to funded projects. UAntwerp's policy covers data produced by its researchers and students, alone or with others, and by external staff who use university infrastructure.<sup class="cite"><a href="#r3">[3]</a></sup> UHasselt's policy requires an initial DMP within six months of the official start of a research project.<sup class="cite"><a href="#r5">[5]</a></sup></p>
+  </section>
+
+  <!-- 11 -->
+  <section id="tips">
+    <h2><span class="num">11</span>Writing a good DMP</h2>
+    <p class="sub">What separates a useful plan from a box-ticking exercise.</p>
+    <div class="grid g2">
+      <div class="card"><h4>Be specific</h4><p>Name the system, the folder, the person and the number. "Data will be stored securely" says nothing; "on the UAntwerp network drive with daily backup, access for 4 named people" says a lot.</p></div>
+      <div class="card"><h4>Justify your choices</h4><p>Funders rarely prescribe formats, repositories or access levels. Explain why yours fit your study.<sup class="cite"><a href="#r11">[11]</a></sup></p></div>
+      <div class="card"><h4>Start early, consult early</h4><p>Talk to the RDM team, IT, the privacy office, the ethics committee and your target repository before you finalise the plan.<sup class="cite"><a href="#r11">[11]</a></sup></p></div>
+      <div class="card"><h4>Use what exists</h4><p>Point to institutional storage, existing SOPs and established repositories instead of inventing your own.<sup class="cite"><a href="#r11">[11]</a></sup></p></div>
+      <div class="card"><h4>Name the people</h4><p>Give each task an owner and a backup. Say who takes over if someone leaves.<sup class="cite"><a href="#r11">[11]</a></sup></p></div>
+      <div class="card"><h4>Keep it alive</h4><p>Version number and date on the plan; review it at each milestone and when something changes.<sup class="cite"><a href="#r1">[1]</a><a href="#r7">[7]</a></sup></p></div>
+    </div>
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Copying generic text from the guidance or from an example plan without adapting it to the study.</li>
+      <li>Leaving questions empty. If a question does not apply, write "not applicable" and say why.</li>
+      <li>Saying data will be "anonymised" when they are only pseudonymised.</li>
+      <li>Promising open data for sensitive health data without checking consent, the GDPR and partner agreements.</li>
+      <li>Forgetting the costs of data management, or the person responsible for it.</li>
+      <li>Writing the plan once and never updating it.</li>
+    </ul>
+    <div class="callout">
+      <p class="callout-title">Check your plan the way a reviewer would</p>
+      <p>KU Leuven publishes a <a href="https://www.kuleuven.be/rdm/en/guidance/dmp/dmp_selfevaluation_rubric.pdf/@@download/file/DMP_SelfEvaluation_Rubric.pdf">DMP self-evaluation rubric</a>,<sup class="cite"><a href="#r7">[7]</a></sup> and the extended Science Europe guide includes a rubric for reviewers.<sup class="cite"><a href="#r12">[12]</a></sup> Use one of them on your group's draft. Real examples of Horizon Europe DMPs can be found on CORDIS.<sup class="cite"><a href="#r7">[7]</a></sup></p>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section id="prepare">
+    <h2><span class="num">12</span>Before class: checklist</h2>
+    <p class="sub">About 30 minutes of preparation. Your ticks are saved in this browser only.</p>
+    <ul class="checklist" id="checklist">
+      <li><input type="checkbox" id="c1"><label for="c1">Read this page, including the two diagrams.</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">Log in once at <a href="https://dmponline.be">dmponline.be</a> with your UAntwerp account, so that login problems are solved before class.</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">Create a test plan with "no funder", and look at the questions of the Flemish template and the UAntwerp guidance next to them.</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">Skim the <a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/data-management-plan/">UAntwerp DMP page</a> and one of the other university pages (UHasselt or KU Leuven).</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">Think of a study you could use for the group project, and write down one sentence for each of the six DMP sections.</label></li>
+      <li><input type="checkbox" id="c6"><label for="c6">Answer the questions in the next section without looking back at the text.</label></li>
+    </ul>
+  </section>
+
+  <!-- 13 -->
+  <section id="quiz">
+    <h2><span class="num">13</span>Check yourself</h2>
+    <p class="sub">Try to answer first, then open the answer.</p>
+    <details><summary>1. Name the three things every DMP describes.</summary>
+      <div class="ans"><p>The data you will collect or reuse; how you will handle them during the project; and how you will preserve and share them afterwards.<sup class="cite"><a href="#r1">[1]</a></sup></p></div></details>
+    <details><summary>2. Why is a DMP called a "living document"?</summary>
+      <div class="ans"><p>Because it is updated as the project develops. The first version states your intentions; the final version should describe what was actually done.<sup class="cite"><a href="#r4">[4]</a><a href="#r7">[7]</a></sup></p></div></details>
+    <details><summary>3. You receive an FWO project starting on 1 January. When is the full DMP due, and to whom?</summary>
+      <div class="ans"><p>Within six months of the official start date, so by 30 June. It goes to the research coordination office of the main host institution (at UAntwerp, the RDM team), not to FWO. The final DMP goes to FWO with the final report.<sup class="cite"><a href="#r9">[9]</a><a href="#r3">[3]</a></sup></p></div></details>
+    <details><summary>4. Your dataset is pseudonymised. Does the GDPR still apply?</summary>
+      <div class="ans"><p>Yes. Pseudonymised data can be linked back to a person with the key, so they are still personal data. Only data that are irreversibly anonymised fall outside the GDPR.</p></div></details>
+    <details><summary>5. Can sensitive health data be FAIR without being open?</summary>
+      <div class="ans"><p>Yes. The metadata can be public and findable with a DOI, while access to the data themselves is restricted and granted under conditions: "as open as possible, as closed as necessary".<sup class="cite"><a href="#r13">[13]</a><a href="#r15">[15]</a></sup></p></div></details>
+    <details><summary>6. Which DMP section would cover a data transfer agreement with a partner in Uganda?</summary>
+      <div class="ans"><p>Legal and ethical requirements (agreements, GDPR rules on transfers outside the EU, local data protection law), with a link to the sharing section if the partner will receive data.</p></div></details>
+    <details><summary>7. What is DMPonline.be, and who runs it?</summary>
+      <div class="ans"><p>The Belgian online tool for writing, sharing and exporting DMPs, based on the DCC's DMPonline. It is run by Belnet for the DMPbelgium consortium of institutions.<sup class="cite"><a href="#r16">[16]</a><a href="#r17">[17]</a></sup></p></div></details>
+  </section>
+
+  <!-- 14 -->
+  <section id="glossary">
+    <h2><span class="num">14</span>Glossary</h2>
+    <p class="sub">Terms you will meet in templates and guidance.</p>
+    <dl class="gloss">
+      <dt>RDM</dt><dd>Research data management: everything you do to keep research data usable, safe and trustworthy, from planning to reuse.</dd>
+      <dt>DMP</dt><dd>Data Management Plan: a written, versioned plan describing how data will be handled during and after a project.</dd>
+      <dt>Metadata</dt><dd>Data about data: who created them, when, how, what the variables mean, and under which licence they can be used.</dd>
+      <dt>Codebook / data dictionary</dt><dd>A list of all variables with their names, labels, types, units and allowed values.</dd>
+      <dt>Persistent identifier (PID)</dt><dd>A permanent reference to a dataset or person, such as a DOI for data or an ORCID iD for researchers.</dd>
+      <dt>Repository</dt><dd>A service that stores, preserves and makes data findable, for example Zenodo or a disciplinary data archive. Search for one at re3data.org.</dd>
+      <dt>Pseudonymisation</dt><dd>Replacing direct identifiers with a code, while keeping a separate key that allows re-identification. Still personal data.</dd>
+      <dt>Anonymisation</dt><dd>Processing data so that people can no longer be identified by any reasonable means. Anonymous data fall outside the GDPR.</dd>
+      <dt>DPIA</dt><dd>Data Protection Impact Assessment: a GDPR assessment (Art. 35) of the risks of processing personal data, needed for high-risk processing such as large-scale health data.</dd>
+      <dt>FRDN</dt><dd>Flemish Research Data Network, which maintains the Flemish standard DMP template.</dd>
+      <dt>FWO / BOF / BELSPO</dt><dd>Research Foundation Flanders; the university's internal Special Research Fund; the Belgian Federal Science Policy Office.</dd>
+    </dl>
+  </section>
+
+  <!-- 15 -->
+  <section id="refs">
+    <h2><span class="num">15</span>Sources</h2>
+    <p class="sub">All web pages were accessed on 12 October 2026. Funder rules change; when in doubt, check the current page or ask your RDM team.</p>
+    <ol class="refs">
+      <li id="r1">University of Antwerp. <em>Data Management Plan</em>. Research Data Management, Open Science &amp; RDM. <a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/data-management-plan/">uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/data-management-plan/</a></li>
+      <li id="r2">University of Antwerp. <em>Research Data Management</em> (overview of the RDM pages: collecting, processing, storage and backup, preservation, sharing, licensing, reuse). <a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/">uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/</a></li>
+      <li id="r3">University of Antwerp. <em>What are UAntwerpen policies? Policies &amp; requirements</em> (RDM policy and FWO, BOF, BELSPO and Horizon Europe requirements). <a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/policies-requirements/">uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/policies-requirements/</a></li>
+      <li id="r4">Hasselt University, University Library. <em>Data Management</em> (DMP guidance, templates, DMPonline step by step). <a href="https://www.uhasselt.be/en/university-library/research/research-data-management/data-management">uhasselt.be/en/university-library/research/research-data-management/data-management</a></li>
+      <li id="r5">Hasselt University. <em>General policy plan on research data management at Hasselt University</em> (2023). <a href="https://api-portal-mgmt.uhasselt.be/media/iqdfnq51/20230406_policyplan_rdm_uhasselt_en.pdf">PDF</a>. See also <em>Funder requirements</em>: <a href="https://www.uhasselt.be/en/university-library/research/research-data-management/funder-requirements">uhasselt.be/…/funder-requirements</a></li>
+      <li id="r6">KU Leuven. <em>Research Data Management</em> (overview and guidance). <a href="https://www.kuleuven.be/rdm/en">kuleuven.be/rdm/en</a></li>
+      <li id="r7">KU Leuven. <em>Data Management Plan (DMP)</em> guidance, including templates, submission, review and the self-evaluation rubric. <a href="https://www.kuleuven.be/rdm/en/guidance/dmp/dmp">kuleuven.be/rdm/en/guidance/dmp/dmp</a></li>
+      <li id="r8">de Haan, H. &amp; Van den Eynden, V. <em>Data Management Plans: a Resource to Shape Institutional Data Management Services</em>. International Journal of Digital Curation. <a href="https://ijdc.net/index.php/ijdc/article/view/1051">ijdc.net/index.php/ijdc/article/view/1051</a></li>
+      <li id="r9">FWO (Research Foundation Flanders). <em>Data Management Plan (DMP)</em>. <a href="https://www.fwo.be/en/about-fwo/research-policy/data-management-plan-dmp/">fwo.be/en/about-fwo/research-policy/data-management-plan-dmp/</a></li>
+      <li id="r10">Flemish Research Data Network (FRDN). <em>Flemish Data Management Plan (DMP) template</em>, v2. Zenodo, 2025. <a href="https://doi.org/10.5281/zenodo.17025558">doi.org/10.5281/zenodo.17025558</a></li>
+      <li id="r11">Digital Curation Centre. <em>How to develop a data management and sharing plan</em>. <a href="https://www.dcc.ac.uk/guidance/how-guides/develop-data-plan">dcc.ac.uk/guidance/how-guides/develop-data-plan</a></li>
+      <li id="r12">Science Europe. <em>Practical Guide to the International Alignment of Research Data Management – Extended Edition</em>. 2021. <a href="https://doi.org/10.5281/zenodo.4915861">doi.org/10.5281/zenodo.4915861</a></li>
+      <li id="r13">Wilkinson, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. <em>Scientific Data</em> 3, 160018 (2016). <a href="https://doi.org/10.1038/sdata.2016.18">doi.org/10.1038/sdata.2016.18</a>. See also GO FAIR: <a href="https://www.go-fair.org/fair-principles/">go-fair.org/fair-principles</a></li>
+      <li id="r14">UK Data Service. <em>Research data management</em> (Learning Hub). <a href="https://ukdataservice.ac.uk/learning-hub/research-data-management/">ukdataservice.ac.uk/learning-hub/research-data-management/</a></li>
+      <li id="r15">European Commission. <em>Horizon Europe Data Management Plan template</em>. <a href="https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/horizon/temp-form/report/data-management-plan_he_en.docx">ec.europa.eu/…/data-management-plan_he_en.docx</a>. Reference documents: <a href="https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/how-to-participate/reference-documents;programCode=HORIZON">Funding &amp; Tenders Portal</a></li>
+      <li id="r16">Belnet. <em>DMPonline.be</em>. <a href="https://dmponline.be">dmponline.be</a>; About: <a href="https://dmponline-prod.belnet.be/about_us">dmponline-prod.belnet.be/about_us</a></li>
+      <li id="r17">Belnet. <em>Laura Standaert, Data Steward at UGent, talks about DMPonline.be</em>. <a href="https://belnet.be/en/news-events/news/laura-standaert-data-steward-ugent-talks-about-dmponlinebe">belnet.be/en/news-events/news/…</a></li>
+      <li id="r18">DMPbelgium. <em>DMPonline.be end-user manual</em>. <a href="https://github.com/DMPbelgium/Guidance/wiki/End-user-manual">github.com/DMPbelgium/Guidance/wiki/End-user-manual</a></li>
+      <li id="r19">The Turing Way Community. <em>Data Management Plan</em>, in The Turing Way handbook. <a href="https://book.the-turing-way.org/reproducible-research/rdm/rdm-dmp">book.the-turing-way.org/reproducible-research/rdm/rdm-dmp</a></li>
+    </ol>
+    <h3>Further reading</h3>
+    <ul>
+      <li>The Turing Way's chapter on DMPs, a short and readable introduction with a strong focus on reproducibility.<sup class="cite"><a href="#r19">[19]</a></sup></li>
+      <li><a href="https://www.re3data.org">re3data.org</a> and <a href="https://fairsharing.org">FAIRsharing.org</a> to find repositories and metadata standards for your field.</li>
+      <li><a href="https://ukdataservice.ac.uk/learning-hub/research-data-management/plan-to-share/costing/">UK Data Service costing tool</a> to estimate the cost of data management.</li>
+    </ul>
+  </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    Pre-class reading for the Research Data Management course, Master of Epidemiology (MEPI), University of Antwerp, 2026–27. Prepared by Bernard Osangir. This page summarises and links to the sources listed above; it does not replace the official guidance of your funder or university.
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Theme toggle
+  var root=document.documentElement, btn=document.getElementById('themeToggle');
+  try{var t=localStorage.getItem('dmp-theme'); if(t) root.setAttribute('data-theme',t);}catch(e){}
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
+    if(!cur){cur=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+    var next=cur==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('dmp-theme',next);}catch(e){}
+  });
+  // Checklist persistence
+  document.querySelectorAll('#checklist input').forEach(function(cb){
+    try{cb.checked=localStorage.getItem('dmp-'+cb.id)==='1';}catch(e){}
+    cb.addEventListener('change',function(){try{localStorage.setItem('dmp-'+cb.id,cb.checked?'1':'0');}catch(e){}});
+  });
+  // Highlight current section in the contents
+  var links=[].slice.call(document.querySelectorAll('nav.toc a'));
+  var map={}; links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){links.forEach(function(a){a.classList.remove('active');}); var a=map[e.target.id]; if(a) a.classList.add('active');}
+      });
+    },{rootMargin:'-20% 0px -70% 0px'});
+    document.querySelectorAll('main section').forEach(function(s){obs.observe(s);});
+  }
+})();
+</script>
+</body>
+</html>
