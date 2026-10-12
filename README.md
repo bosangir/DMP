@@ -3,7 +3,7 @@
 Pre-class reading on Data Management Plans (DMPs) and the research data lifecycle for the
 Research Data Management course in the Master of Epidemiology (MEPI), University of Antwerp, 2026–27.
 
-**Authors:** Bernard Isekah Osangir and Tafadzwa Maseko
+**Authors:** Bernard Isekah Osangir, Tafadzwa Maseko and Prof. Dr. Steven Abrams
 
 **Read it online:** https://bosangir.github.io/DMP/
 
