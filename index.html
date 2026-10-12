@@ -96,6 +96,7 @@ p{margin:0 0 16px;max-width:72ch}
 ul,ol{max-width:70ch;padding-left:22px}
 li{margin-bottom:6px}
 strong,b{font-weight:700}
+code{font-family:Consolas,"Courier New",monospace;font-size:.9em}
 sup{line-height:0;vertical-align:super}
 sup.cite a{font-weight:700;font-size:12px;text-decoration:none;padding:0 2px;color:var(--red)}
 .callout{background:var(--panel);padding:20px 24px;margin:22px 0;max-width:76ch}
@@ -139,7 +140,7 @@ dl.gloss{display:grid;grid-template-columns:minmax(150px,220px) minmax(0,1fr);ga
 dl.gloss dt{font-weight:700}
 dl.gloss dd{margin:0;font-size:17px;line-height:26px}
 ol.refs{font-size:16px;line-height:24px;max-width:none;padding-left:28px}
-ol.refs li{margin-bottom:10px;scroll-margin-top:16px}
+ol.refs li{margin-bottom:10px;scroll-margin-top:16px;overflow-wrap:anywhere}
 ol.refs li:target{background:var(--panel)}
 footer{background:var(--footer-bg);color:var(--footer-text);font-size:16px;line-height:24px;padding:32px 0 44px}
 footer a{color:var(--footer-text)}
@@ -171,7 +172,7 @@ footer a{color:var(--footer-text)}
     <p class="authors"><b>Authors:</b> Bernard Isekah Osangir, Tafadzwa Maseko and Prof. Dr. Steven Abrams</p>
     <div class="meta">
       <span><b>Course</b> Master of Epidemiology (MEPI), University of Antwerp, 2026–27</span>
-      <span><b>Reading time</b> about 30 minutes</span>
+      <span><b>Reading time</b> about 45 minutes</span>
       <span><b>Last checked</b> 12 October 2026</span>
     </div>
   </div>
@@ -189,6 +190,7 @@ footer a{color:var(--footer-text)}
       <li><a href="#funders">Who asks for what</a></li>
       <li><a href="#contents">What goes in a DMP</a></li>
       <li><a href="#fair">FAIR, open and GDPR</a></li>
+      <li><a href="#uantwerp">RDM at UAntwerp in practice</a></li>
       <li><a href="#dmponline">Using DMPonline.be</a></li>
       <li><a href="#institutions">UAntwerp, UHasselt, KU Leuven</a></li>
       <li><a href="#tips">Writing a good DMP</a></li>
@@ -493,9 +495,87 @@ footer a{color:var(--footer-text)}
     <p>Two other legal points can apply to your study. If you work with genetic resources from another country, the Nagoya Protocol on access and benefit-sharing may apply.<sup class="cite"><a href="#r1">[1]</a></sup> If the project produces results that could be patented or commercialised, talk to the valorisation office before you share data.</p>
   </section>
 
+  <!-- UAntwerp RDM in practice -->
+  <section id="uantwerp">
+    <h2><span class="num">09</span>RDM at UAntwerp in practice</h2>
+    <p class="sub">What the University of Antwerp asks of you at each stage, and which services to use.</p>
+    <p>UAntwerp defines research data management as the planning, collecting, processing, storing, accessing and reusing of data, before, during and after research. Research data are the evidence behind your findings: documents, spreadsheets, code, models, audio or video recordings and more. The university's RDM pages follow the lifecycle: policies and requirements, the DMP, collecting, processing, storage and backup, preservation, sharing, licensing and reuse.<sup class="cite"><a href="#r2">[2]</a></sup> Good practice prevents data loss, makes clear which version is current, makes sharing and reuse possible, shows early which services you need (such as ethical or legal advice) and helps prevent fraud.<sup class="cite"><a href="#r2">[2]</a></sup></p>
+    <p>The RDM team is part of Research, Innovation &amp; Valorisation Antwerp (RIVA) and can be reached at <a href="mailto:rdm-support@uantwerpen.be">rdm-support@uantwerpen.be</a>. The university's RDM policy applies to its researchers and students, working alone or with others, and to external staff who use university infrastructure.<sup class="cite"><a href="#r3">[3]</a></sup></p>
+
+    <h3>Collecting: choose open, durable file formats</h3>
+    <p>Work in whatever format suits you during the project, but convert to an open, standard format for archiving: one that free tools can read and your field commonly uses. If you must keep a proprietary format, add a <code>README.txt</code> naming the software and its version.<sup class="cite"><a href="#r20">[20]</a></sup></p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Type</th><th>Preferred for archiving</th><th>Not preferred</th></tr></thead>
+        <tbody>
+          <tr><td>Text</td><td>PDF/A, ODT, TXT, HTML, XML</td><td>DOC, DOCX, RTF</td></tr>
+          <tr><td>Spreadsheets</td><td>CSV, ODS</td><td>XLS, XLSX</td></tr>
+          <tr><td>Databases</td><td>SQL, CSV</td><td>MDB, DBF</td></tr>
+          <tr><td>Images</td><td>TIFF, JPEG 2000, PNG</td><td>–</td></tr>
+          <tr><td>Audio / video</td><td>BWF, MXF (audio); MXF, MKV (video)</td><td>MP3, WAV, AAC, MPEG, AVI</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Organising: names, folders and versions</h3>
+    <ul>
+      <li><strong>Folders:</strong> a hierarchy with broad topics at the top; no more than about 100 items per folder; follow your group's conventions where they exist.<sup class="cite"><a href="#r20">[20]</a></sup></li>
+      <li><strong>File names:</strong> short and clear; dates in ISO 8601 format (<code>YYYYMMDD</code>), ideally at the start; no spaces, dots or special characters; separate words with hyphens or underscores. For example: <code>20261012_TBcohort_baseline_v02.csv</code>.<sup class="cite"><a href="#r20">[20]</a></sup></li>
+      <li><strong>Versions:</strong> keep one master file in a fixed place and work only on copies; number versions consistently (<code>v0_1</code>, <code>v0_2</code>…) and keep a version history table if useful. Git or Subversion can track versions; life scientists can use an Electronic Lab Notebook (ELN).<sup class="cite"><a href="#r20">[20]</a></sup></li>
+    </ul>
+
+    <h3>Documenting: README files and metadata</h3>
+    <p>Documentation gives others (and your future self) the context needed to understand and reuse the data: codebooks, protocols, methods, units and definitions, quality checks, and file naming conventions. Keep it in a <code>README.txt</code>, codebook, logbook or ELN <em>in the same folder as the data</em>. Metadata (creator, title, identifier such as a DOI, date, description, format, version, licence…) make data findable in repositories; the DataCite Metadata Kernel describes the common fields, and FAIRsharing lists discipline-specific standards.<sup class="cite"><a href="#r20">[20]</a></sup></p>
+
+    <h3>Storing: use UAntwerp services and the 3-2-1 rule</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Service</th><th>What it is</th><th>Points to know</th></tr></thead>
+        <tbody>
+          <tr><td>H:\ drive</td><td>Personal home folder: only you can read and write</td><td>Automatic backup; small (about 1.5 GB for staff)</td></tr>
+          <tr><td>N:\ drive</td><td>Shared folders for departments, faculties and centres</td><td>Up to 40 GB per unit; <strong>recommended</strong>, because data stay available when someone leaves</td></tr>
+          <tr><td>OneDrive for Business</td><td>Personal cloud storage with your UAntwerp account</td><td>Up to 100 GB; not backed up by the ICT Department (Microsoft's recovery options apply)</td></tr>
+          <tr><td>Teams / SharePoint</td><td>Shared cloud folders for a team</td><td>Up to 500 GB; not backed up by the ICT Department</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:15px;color:var(--grey)">Source: UAntwerp storage and back-up page.<sup class="cite"><a href="#r21">[21]</a></sup> Questions: ICT helpdesk, helpdeskICT@uantwerpen.be.</p>
+    <p>Back up important data with the <strong>3-2-1 rule</strong>: at least three copies, on at least two different media, with at least one copy in another location.<sup class="cite"><a href="#r21">[21]</a></sup></p>
+
+    <h3>Protecting sensitive and personal data</h3>
+    <ul>
+      <li>Collect only the personal data you really need, and anonymise or pseudonymise where possible. Store the key (codebook) separately and securely.<sup class="cite"><a href="#r22">[22]</a></sup></li>
+      <li>Keep paper records such as consent forms separate and locked away, also after the project ends.<sup class="cite"><a href="#r22">[22]</a></sup></li>
+      <li>Give access only to people who need it (need-to-know), check permissions regularly, and password-protect and encrypt laptops, phones and USB sticks.<sup class="cite"><a href="#r22">[22]</a></sup></li>
+      <li>Use UAntwerp services with your UAntwerp account. <strong>Never</strong> use external cloud services such as Google Drive, Dropbox, iCloud or Box for research data.<sup class="cite"><a href="#r22">[22]</a></sup></li>
+      <li>All processing of personal data must be documented.<sup class="cite"><a href="#r22">[22]</a></sup></li>
+    </ul>
+
+    <h3>Preserving: how long to keep data</h3>
+    <div class="grid g3">
+      <div class="card"><h4>5 or 10 years</h4><p>The usual retention period, depending on the type of project, counted from the end of the project or the publication.</p></div>
+      <div class="card"><h4>Up to 20 years</h4><p>Samples and data that fall under the Nagoya Protocol.</p></div>
+      <div class="card"><h4>Up to 25 years</h4><p>Samples and data from clinical studies.</p></div>
+    </div>
+    <p>Data that still have value after that period are kept permanently and transferred to the University Archive (<a href="mailto:archief@uantwerpen.be">archief@uantwerpen.be</a>). Researchers themselves are responsible for preserving their data and documentation. When deciding what to keep, consider funder rules, any obligation to destroy data, the need to verify results, and the cost of keeping or recreating the data.<sup class="cite"><a href="#r23">[23]</a></sup></p>
+
+    <h3>Sharing: repositories and access levels</h3>
+    <p>UAntwerp has no institutional repository for research data. Its Institutional Repository (IRUA) lists publications, and you can add a reference to your dataset there. Deposit the data themselves in a trusted repository, which gives them a DOI. Options include Zenodo (free, with a UAntwerpen community), Figshare (free) and Dryad (paid), or a discipline-specific repository; search <a href="https://www.re3data.org">re3data.org</a> to find one.<sup class="cite"><a href="#r23">[23]</a></sup></p>
+    <div class="grid g2">
+      <div class="card"><h4>Open</h4><p>Available to everyone without restrictions. The preferred option under Open Science.</p></div>
+      <div class="card"><h4>Embargo</h4><p>Available after a set period, for example while results are being validated.</p></div>
+      <div class="card"><h4>Restricted</h4><p>Available under certain conditions, for example for valorisation or sensitive data.</p></div>
+      <div class="card"><h4>Closed</h4><p>Not accessible to others under any conditions.</p></div>
+    </div>
+    <p>If data are available on request, give a shared email address of the research group or department, since individual researchers may leave. If you cannot share your data, say so in a statement and explain why (for example, sensitive personal data).<sup class="cite"><a href="#r24">[24]</a></sup></p>
+
+    <h3>Licensing and ownership</h3>
+    <p>A repository will ask you to choose a licence. UAntwerp recommends <strong>CC BY 4.0</strong> for the widest reuse (users must credit you); <strong>CC0</strong> places data in the public domain. For databases there are equivalent Open Data Commons licences (PDDL, ODC-By, ODbL), and for software, licences such as the GNU GPL v3. The Creative Commons licence chooser helps you pick, and the Valorisation Office (valorisatie@uantwerpen.be) advises when commercial use is possible.<sup class="cite"><a href="#r25">[25]</a></sup> The university generally holds the rights to data generated by its researchers, and those data should remain available to UAntwerp when a researcher leaves.<sup class="cite"><a href="#r26">[26]</a></sup></p>
+  </section>
+
   <!-- 9 -->
   <section id="dmponline">
-    <h2><span class="num">09</span>Using DMPonline.be</h2>
+    <h2><span class="num">10</span>Using DMPonline.be</h2>
     <p class="sub">The Belgian tool for writing, sharing and exporting DMPs.</p>
     <p>DMPonline.be is the Belgian instance of DMPonline, the tool developed by the Digital Curation Centre. It is run by Belnet and used by most Belgian universities, university colleges and research institutes, including UAntwerp, UHasselt, KU Leuven, UGent and UCLouvain.<sup class="cite"><a href="#r16">[16]</a></sup> The DMPbelgium consortium that set it up as a shared tool was founded in January 2017 by Ghent University, INBO, the University of Antwerp, Hasselt University, ULB, VUB and Sciensano.<sup class="cite"><a href="#r17">[17]</a></sup></p>
     <p>The tool contains the templates of the main funders, guidance under every question (both from the funder and from your university), and options to share a plan with co-authors, request feedback and export to PDF or Word.<sup class="cite"><a href="#r4">[4]</a><a href="#r16">[16]</a></sup></p>
@@ -519,7 +599,7 @@ footer a{color:var(--footer-text)}
 
   <!-- 10 -->
   <section id="institutions">
-    <h2><span class="num">10</span>How three Flemish universities handle DMPs</h2>
+    <h2><span class="num">11</span>How three Flemish universities handle DMPs</h2>
     <p class="sub">The same funder rules, with slightly different local routes.</p>
     <div class="tablewrap">
       <table>
@@ -539,7 +619,7 @@ footer a{color:var(--footer-text)}
 
   <!-- 11 -->
   <section id="tips">
-    <h2><span class="num">11</span>Writing a good DMP</h2>
+    <h2><span class="num">12</span>Writing a good DMP</h2>
     <p class="sub">What separates a useful plan from a box-ticking exercise.</p>
     <div class="grid g2">
       <div class="card"><h4>Be specific</h4><p>Name the system, the folder, the person and the number. "Data will be stored securely" says nothing; "on the UAntwerp network drive with daily backup, access for 4 named people" says a lot.</p></div>
@@ -566,8 +646,8 @@ footer a{color:var(--footer-text)}
 
   <!-- 12 -->
   <section id="prepare">
-    <h2><span class="num">12</span>Before class: checklist</h2>
-    <p class="sub">About 30 minutes of preparation. Your ticks are saved in this browser only.</p>
+    <h2><span class="num">13</span>Before class: checklist</h2>
+    <p class="sub">About 45 minutes of preparation. Your ticks are saved in this browser only.</p>
     <ul class="checklist" id="checklist">
       <li><input type="checkbox" id="c1"><label for="c1">Read this page, including the two diagrams.</label></li>
       <li><input type="checkbox" id="c2"><label for="c2">Log in once at <a href="https://dmponline.be">dmponline.be</a> with your UAntwerp account, so that login problems are solved before class.</label></li>
@@ -580,11 +660,11 @@ footer a{color:var(--footer-text)}
 
   <!-- 13 -->
   <section id="quiz">
-    <h2><span class="num">13</span>Check yourself</h2>
+    <h2><span class="num">14</span>Check yourself</h2>
     <p class="sub">A random practice quiz first, then a few open questions.</p>
 
-    <h3>Practice quiz: 20 random questions</h3>
-    <p>Each round draws 20 questions at random from a bank of 36, in a different order each time. If you get one wrong, you see the right answer and why straight away. Score 14 or more (70%) to pass.</p>
+    <h3>Practice quiz</h3>
+    <p>Each round gives you 20 questions drawn at random, so every round is different. The questions cover this page, with a focus on research data management at UAntwerp. If you get one wrong, you see the right answer and why straight away. Score 14 or more (70%) to pass.</p>
     <div class="pq" id="pq" aria-live="polite">
       <div class="pq-top"><span id="pqCount">Question 1 of 20</span><span>Score: <b id="pqScore">0</b></span></div>
       <div class="pq-bar"><span id="pqBar"></span></div>
@@ -612,7 +692,7 @@ footer a{color:var(--footer-text)}
 
   <!-- 14 -->
   <section id="glossary">
-    <h2><span class="num">14</span>Glossary</h2>
+    <h2><span class="num">15</span>Glossary</h2>
     <p class="sub">Terms you will meet in templates and guidance.</p>
     <dl class="gloss">
       <dt>RDM</dt><dd>Research data management: everything you do to keep research data usable, safe and trustworthy, from planning to reuse.</dd>
@@ -631,7 +711,7 @@ footer a{color:var(--footer-text)}
 
   <!-- 15 -->
   <section id="refs">
-    <h2><span class="num">15</span>Sources</h2>
+    <h2><span class="num">16</span>Sources</h2>
     <p class="sub">All web pages were accessed on 12 October 2026. Funder rules change; when in doubt, check the current page or ask your RDM team.</p>
     <ol class="refs">
       <li id="r1">University of Antwerp. <em>Data Management Plan</em>. Research Data Management, Open Science &amp; RDM. <a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/data-management-plan/">uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/data-management-plan/</a></li>
@@ -653,6 +733,13 @@ footer a{color:var(--footer-text)}
       <li id="r17">Belnet. <em>Laura Standaert, Data Steward at UGent, talks about DMPonline.be</em>. <a href="https://belnet.be/en/news-events/news/laura-standaert-data-steward-ugent-talks-about-dmponlinebe">belnet.be/en/news-events/news/…</a></li>
       <li id="r18">DMPbelgium. <em>DMPonline.be end-user manual</em>. <a href="https://github.com/DMPbelgium/Guidance/wiki/End-user-manual">github.com/DMPbelgium/Guidance/wiki/End-user-manual</a></li>
       <li id="r19">The Turing Way Community. <em>Data Management Plan</em>, in The Turing Way handbook. <a href="https://book.the-turing-way.org/reproducible-research/rdm/rdm-dmp">book.the-turing-way.org/reproducible-research/rdm/rdm-dmp</a></li>
+      <li id="r20">University of Antwerp. <em>Collecting data</em> (file formats, file naming, versioning, documentation, metadata). <a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/collecting-data/">uantwerpen.be/…/research-data-management/collecting-data/</a></li>
+      <li id="r21">University of Antwerp. <em>Storage and back-up</em>. <a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/storage-backup/">uantwerpen.be/…/research-data-management/storage-backup/</a></li>
+      <li id="r22">University of Antwerp. <em>Processing data</em> (sensitive data and data security). <a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/processing-data/">uantwerpen.be/…/research-data-management/processing-data/</a></li>
+      <li id="r23">University of Antwerp. <em>Preservation</em> (selection, retention periods, repositories). <a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/preservation/">uantwerpen.be/…/research-data-management/preservation/</a></li>
+      <li id="r24">University of Antwerp. <em>Sharing</em> (access levels, data on request). <a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/sharing/">uantwerpen.be/…/research-data-management/sharing/</a></li>
+      <li id="r25">University of Antwerp. <em>Licensing</em>. <a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/licensing/">uantwerpen.be/…/research-data-management/licensing/</a></li>
+      <li id="r26">University of Antwerp. <em>Reuse</em> (rights to data, open access). <a href="https://www.uantwerpen.be/en/research/policy/open-science-rdm/research-data-management/reuse/">uantwerpen.be/…/research-data-management/reuse/</a></li>
     </ol>
     <h3>Further reading</h3>
     <ul>
@@ -724,7 +811,71 @@ footer a{color:var(--footer-text)}
     {q:"The Nagoya Protocol matters for your DMP when…",o:["You acquire or use genetic resources from another country","You process personal data","You publish in an open-access journal","You use cloud storage"],e:"It covers access to genetic resources and the fair sharing of benefits (ABS)."},
     {q:"Which DMP statement about storage is best?",o:["Data are stored on the UAntwerp network drive with daily backup; access is limited to four named team members","Data will be stored securely","Data will be stored on a laptop and on a USB stick","Data storage will be decided later"],e:"Be specific: name the system, the backup, the people and the numbers."},
     {q:"A question in the template does not apply to your study. What should you do?",o:["Write “not applicable” and briefly say why","Leave it empty","Copy the guidance text into the answer","Delete the question from the template"],e:"Reviewers need to see that you considered the question."},
-    {q:"Which file format is best for long-term preservation of a tabular dataset?",o:["CSV (an open, non-proprietary format)","An old .xls file","A screenshot of the spreadsheet","A password-protected Word file"],e:"Open, stable formats such as CSV, PDF/A or TIFF stay readable for a long time."}
+    {q:"Which file format is best for long-term preservation of a tabular dataset?",o:["CSV (an open, non-proprietary format)","An old .xls file","A screenshot of the spreadsheet","A password-protected Word file"],e:"Open, stable formats such as CSV, PDF/A or TIFF stay readable for a long time."},
+    {q:"How does UAntwerp define research data management?",o:["Planning, collecting, processing, storing, accessing and reusing data, before, during and after research","Storing data on the university servers","Writing the methods section of a paper","The statistical analysis of research data"],e:"RDM covers the whole lifecycle, not only storage."},
+    {q:"According to UAntwerp, which of these can be research data?",o:["All of these: spreadsheets, code, models and audio or video recordings","Only numerical data in spreadsheets","Only data published in a journal","Only data collected through questionnaires"],e:"Research data are any evidence that supports your research, in any format."},
+    {q:"Which is NOT a benefit of good RDM listed by UAntwerp?",o:["It guarantees publication in a high-impact journal","It prevents data loss","It makes clear which version of the data is the current one","It helps prevent fraud"],e:"Good RDM prevents loss, confusion and fraud and makes sharing possible, but it does not guarantee publication."},
+    {q:"Within which UAntwerp department does the RDM team sit?",o:["Research, Innovation & Valorisation Antwerp (RIVA)","The ICT Department","The University Archive","The University Library's lending desk"],e:"The RDM team is part of RIVA's research affairs office."},
+    {q:"Who does the UAntwerp RDM policy apply to?",o:["Researchers and students, alone or with others, and external staff using university infrastructure","Only professors with external funding","Only PhD students","Only projects funded by FWO"],e:"The policy applies to everyone who produces research data at or with UAntwerp."},
+    {q:"Which format does UAntwerp prefer for archiving a spreadsheet?",o:["CSV or ODS","XLSX","XLS","DOCX"],e:"Open formats that free tools can read last longer. XLS and XLSX are on the not-preferred list."},
+    {q:"Which of these is on UAntwerp's list of NOT preferred formats?",o:["DOCX","PDF/A","TXT","CSV"],e:"DOC, DOCX and RTF are proprietary text formats; PDF/A, ODT and TXT are preferred for archiving."},
+    {q:"Which is a preferred archive format for images?",o:["TIFF","XLSX","MP3","DOCX"],e:"TIFF, JPEG 2000 and PNG are preferred for images."},
+    {q:"Which is a preferred archive format for text documents?",o:["PDF/A","DOC","RTF","DOCX"],e:"PDF/A is designed for long-term archiving."},
+    {q:"You must keep data in a proprietary format. What does UAntwerp advise?",o:["Add a README.txt naming the software and its version","Rename the file extension to .txt","Delete the original once you have printed it","Nothing: proprietary formats are fine for archiving"],e:"Future users need to know which software, and which version, can open the file."},
+    {q:"How should you write dates in file names, according to UAntwerp?",o:["ISO 8601 format (YYYYMMDD), ideally at the start of the name","DD-MM-YY at the end of the name","As words, e.g. 12October2026","Dates should never be used in file names"],e:"YYYYMMDD at the start makes files sort in date order."},
+    {q:"Which file name follows UAntwerp's advice best?",o:["20261012_TBcohort_baseline_v02.csv","final data (new).xlsx","data.final.FINAL.csv","my file 12-10-26.docx"],e:"Date first in YYYYMMDD format, no spaces or extra dots, words separated by underscores, and a version number."},
+    {q:"How should you separate words in file and folder names?",o:["With hyphens or underscores","With spaces","With dots","With special characters such as & or #"],e:"Spaces, dots and special characters cause problems in software and scripts."},
+    {q:"About how many items should a folder hold at most, according to UAntwerp?",o:["About 100","About 10","About 1,000","There is no limit"],e:"Keep folders manageable and review them regularly."},
+    {q:"What is UAntwerp's advice on versions of a data file?",o:["Keep one master file in a fixed place and make changes only on copies","Overwrite the file each time you make a change","Keep every version on your desktop","Email each new version to yourself"],e:"A single master file avoids confusion about which version is current."},
+    {q:"Which is a consistent version-numbering scheme as suggested by UAntwerp?",o:["test.v0_1, test.v0_2, test.v0_3","test, test-new, test-newest","test_final, test_final2, test_reallyfinal","test (1), test (2), test (copy)"],e:"Consistent numbers or dates make versions easy to follow."},
+    {q:"Which tool does UAntwerp mention for tracking versions of files?",o:["Git (or Subversion)","Dropbox","WhatsApp","Google Drive"],e:"Git and Subversion track changes to files; GitHub is mainly for software."},
+    {q:"What does ELN stand for?",o:["Electronic Lab Notebook","European Licence Network","External Link Number","Encrypted Local Network"],e:"An ELN records experiments and has built-in version control."},
+    {q:"Where should a README file be stored?",o:["In the same folder as the data it describes","In your email inbox","Only in the DMP","On a separate USB stick"],e:"Documentation must travel with the data."},
+    {q:"What is metadata?",o:["Information about data that helps people find and understand them","Data that have been deleted","The largest file in your project","A type of encryption"],e:"Examples: creator, title, DOI, date, description, format, version and licence."},
+    {q:"Which standard describes the common metadata fields for datasets, as mentioned by UAntwerp?",o:["The DataCite Metadata Kernel","ICD-11","The GDPR","ISO 9001"],e:"DataCite is the organisation behind most dataset DOIs."},
+    {q:"Where can you look for discipline-specific metadata standards?",o:["FAIRsharing","Dropbox","Wikipedia","The FWO e-portal"],e:"FAIRsharing (and the DCC) list standards, repositories and policies by discipline."},
+    {q:"What is the UAntwerp H:\\ drive?",o:["A personal home folder that only you can read and write","A shared folder for the whole department","A public website","A drive for installing software"],e:"H:\\ is personal and backed up, but small."},
+    {q:"What is the UAntwerp N:\\ drive?",o:["Shared folders for departments, faculties and centres","Your personal home folder","A read-only drive with software","An external cloud service"],e:"N:\\ holds common data for a unit, up to 40 GB per unit."},
+    {q:"Why does UAntwerp recommend the N:\\ drive for project data?",o:["Data stay available to the team when someone leaves","It is the largest storage option","It can be shared with anyone on the internet","It needs no password"],e:"Data on a personal drive leave with the person; data on N:\\ stay with the group."},
+    {q:"How much storage does OneDrive for Business give you at UAntwerp?",o:["Up to 100 GB","Up to 1.5 GB","Up to 40 GB","Unlimited"],e:"OneDrive comes with the Microsoft 365 licence for staff and students."},
+    {q:"How much storage do Microsoft Teams and SharePoint offer at UAntwerp?",o:["Up to 500 GB","Up to 100 MB","Up to 10 GB","Up to 40 GB"],e:"Teams is useful for a shared folder plus conversations."},
+    {q:"Does the UAntwerp ICT Department itself back up OneDrive, Teams and SharePoint?",o:["No: Microsoft's own recovery methods apply","Yes, every hour","Yes, but only for students","Only if you ask the RDM team"],e:"Know your backup strategy, and follow the 3-2-1 rule for important data."},
+    {q:"What is the 3-2-1 backup rule?",o:["At least 3 copies, on 2 different media, with 1 copy in another location","3 backups per day, 2 per week, 1 per month","3 people, 2 passwords, 1 computer","Back up 3 times, check 2 times, delete 1 copy"],e:"Spreading copies protects against theft, fire and hardware failure."},
+    {q:"Which storage must you NEVER use for UAntwerp research data?",o:["External cloud services such as Google Drive, Dropbox, iCloud or Box","The N:\\ drive","OneDrive for Business with your UAntwerp account","Microsoft Teams with your UAntwerp account"],e:"External services are not maintained by UAntwerp and offer no security guarantees."},
+    {q:"Whom do you contact at UAntwerp for questions about storage and data security?",o:["The ICT helpdesk (helpdeskICT@uantwerpen.be)","The Valorisation Office","The University Archive","FWO"],e:"The ICT Department advises on storage, security and backups."},
+    {q:"What does \u201cneed-to-know\u201d access mean?",o:["Only people who need the data for their work get access","Everyone in the faculty can see the data","Participants decide who sees the data","Access is given to anyone who asks"],e:"Limit access on all devices and in all locations, and check permissions regularly."},
+    {q:"What should you do with a laptop or USB stick that holds research data?",o:["Password-protect it, encrypt it and keep it physically secure","Nothing: they are personal devices","Share the password with the team","Leave it unlocked so colleagues can use it"],e:"Portable devices are easily lost or stolen."},
+    {q:"Where should paper consent forms be kept?",o:["Separate from the research data, secure and locked, also after the project","In the same folder as the questionnaire data","At home","Scanned and emailed to the team, then thrown away"],e:"Consent forms identify participants, so they need the same protection as the data."},
+    {q:"Where should the key that links pseudonyms to participants be kept?",o:["Separately and securely, away from the research data","In the same spreadsheet as the data","In the DMP","In a shared Dropbox folder"],e:"If the key is kept with the data, pseudonymisation offers little protection."},
+    {q:"\u201cAll processing of personal data must be\u2026\u201d",o:["documented","avoided","published","approved by FWO"],e:"UAntwerp asks you to document every processing of personal data."},
+    {q:"Which principle means you collect only the personal data you really need?",o:["Data minimisation","Data maximisation","Open data","Data replication"],e:"Do not collect or process unnecessary sensitive data."},
+    {q:"What is the usual retention period for research data at UAntwerp?",o:["5 or 10 years, from the end of the project or the publication","1 year","Until the researcher leaves","Forever, for all data"],e:"The exact period depends on the project type and the funder."},
+    {q:"For how long may data from clinical studies need to be kept?",o:["Up to 25 years","Up to 2 years","Up to 5 years","They must be deleted after the study"],e:"Clinical studies have the longest retention periods."},
+    {q:"For how long may data covered by the Nagoya Protocol need to be kept?",o:["Up to 20 years","Up to 1 year","Up to 5 years","Until the paper is published"],e:"Nagoya data concern genetic resources and benefit sharing."},
+    {q:"What happens at UAntwerp to data that still have value after the retention period?",o:["They are kept permanently and transferred to the University Archive","They are deleted automatically","They are sent to FWO","They are published on the university website"],e:"Contact the University Archive at archief@uantwerpen.be."},
+    {q:"Who is responsible for preserving research data and their documentation?",o:["The researchers","The ICT Department","The publisher","The participants"],e:"The RDM team and the archive advise, but the responsibility stays with the researchers."},
+    {q:"Which is NOT a criterion for deciding which data to keep?",o:["Which files are the largest","Funder requirements","Any obligation to destroy data, for example for ethical reasons","The cost of keeping or recreating the data"],e:"Selection depends on obligations, verification needs, reuse value and cost, not file size."},
+    {q:"Does UAntwerp have its own institutional repository for research data?",o:["No: IRUA lists publications; data go to an external trusted repository","Yes, IRUA stores all research data","Yes, the H:\\ drive","Yes, DMPonline.be"],e:"Deposit data in a trusted repository and add a reference to the dataset in IRUA."},
+    {q:"What is IRUA?",o:["UAntwerp's Institutional Repository, which lists publications","A funding programme","A metadata standard","An encryption tool"],e:"Web of Science publications are added automatically; others you report yourself."},
+    {q:"Which general repository has a UAntwerpen community and is free to use?",o:["Zenodo","Dryad","Dropbox","Box"],e:"Zenodo gives each upload a DOI."},
+    {q:"Which of these repositories charges a fee?",o:["Dryad","Zenodo","Figshare","re3data"],e:"Zenodo and Figshare are free; Dryad charges for deposits."},
+    {q:"Where can you search for a suitable data repository?",o:["re3data.org","DMPonline.be","The FWO e-portal","IRUA"],e:"re3data.org is a registry of research data repositories."},
+    {q:"What does a trusted repository give your dataset that improves findability and citation?",o:["A DOI","A password","A patent","A peer review"],e:"A DOI is a persistent identifier that keeps pointing to the dataset."},
+    {q:"Under Open Science, which access level is preferred?",o:["Open access","Closed access","Restricted access","Embargo"],e:"Open is preferred where possible; other levels need a reason."},
+    {q:"What does \u201cembargo\u201d mean for a dataset?",o:["The data become available after a set period","The data can never be shared","The data are available to everyone immediately","The data are deleted after a set period"],e:"An embargo can give you time to validate or publish first."},
+    {q:"What does \u201crestricted access\u201d mean for a dataset?",o:["The data are available under certain conditions","The data are open to everyone","The data are deleted","The data are only on paper"],e:"Restricted access suits sensitive data or data with commercial value."},
+    {q:"Your data are \u201cavailable on request\u201d. Which contact should you give?",o:["A shared email address of the research group or department","Your personal Gmail address","The participants' email addresses","No contact: requests come through the journal"],e:"Individuals may leave the university; a shared address keeps working."},
+    {q:"You cannot share your data. What should you do?",o:["Add a statement explaining why, for example because they are sensitive personal data","Say nothing","Share them anyway","Delete the data"],e:"Explaining the reason is part of responsible sharing."},
+    {q:"Which licence does UAntwerp recommend for the widest reuse of data?",o:["CC BY 4.0","All rights reserved","CC BY-NC-ND","No licence at all"],e:"CC BY lets anyone reuse the data, as long as they credit you."},
+    {q:"What does CC0 mean?",o:["No rights reserved: the work is placed in the public domain where possible","Only non-commercial use is allowed","No reuse is allowed","Only the university may reuse the data"],e:"CC0 removes all conditions, including attribution."},
+    {q:"Which family of licences is designed for databases?",o:["Open Data Commons (PDDL, ODC-By, ODbL)","GNU GPL","ISO 8601","DataCite"],e:"They mirror CC0, CC BY and CC BY-SA for databases."},
+    {q:"Which licence does UAntwerp mention for software and source code?",o:["GNU GPL v3","CC BY-ND","ISO 8601","ODbL"],e:"Creative Commons licences are not designed for software."},
+    {q:"You think your data may have commercial value. Whom do you contact at UAntwerp?",o:["The Valorisation Office (valorisatie@uantwerpen.be)","The ICT helpdesk","The University Archive","The Library"],e:"Talk to valorisation before sharing data with possible commercial value."},
+    {q:"Who generally holds the rights to data generated by UAntwerp researchers?",o:["The university","The individual PhD student","The publisher","The funder, always"],e:"Data should stay available to the university when a researcher leaves; contracts can change this."},
+    {q:"Whom do you contact at UAntwerp about ethics clearance for your study?",o:["The Ethics team (ethics@uantwerpen.be)","The ICT helpdesk","The University Archive","DMPonline.be"],e:"UAntwerp asks you to check early whether your research needs ethics clearance."},
+    {q:"Whom do you contact at UAntwerp with questions about personal data and privacy?",o:["The privacy contact (privacy@uantwerpen.be)","The Valorisation Office","The University Archive","The Library"],e:"Privacy questions include DPIAs, consent and data transfers."},
+    {q:"Which tool does UAntwerp suggest for estimating the costs of data management?",o:["The UK Data Service costing tool","re3data.org","The FWO e-portal","FAIRsharing"],e:"It is an activity-based costing tool: list each RDM task and estimate its cost."},
+    {q:"How many versions does a DMP usually go through for Flemish funders?",o:["Four: application, initial full DMP, updates, final DMP","One: the application DMP","Two: draft and final","It depends only on the researcher"],e:"The plan moves from intention (application) to a record of what was done (final)."}
   ];
   var ROUND=20, PASS=14;
   var card=document.getElementById('pqCard'), countEl=document.getElementById('pqCount'), scoreEl=document.getElementById('pqScore'), bar=document.getElementById('pqBar');
