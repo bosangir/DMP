@@ -16,6 +16,18 @@
   /* aliases used by the inline diagrams */
   --bg:var(--white); --surface:var(--white); --surface-2:var(--panel); --text:var(--navy); --muted:var(--grey);
   --accent:var(--navy); --accent-soft:var(--panel); --accent-2:var(--red); --accent-2-soft:var(--panel); --gold:var(--navy); --gold-soft:var(--panel);
+  --footer-bg:#1B365F; --footer-text:#ffffff; --ok:#1E7B4F; --ok-soft:#E5F3EC; --bad-soft:#FBE9EB;
+}
+/* Dark mode: same navy/red identity, light text on deep navy */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --navy:#E6ECF4; --red:#FF6B74; --grey:#A9B4C2; --panel:#17263C; --line:#2A3C57; --white:#0E1A2B; --link:#E6ECF4;
+    --footer-bg:#08111D; --footer-text:#E6ECF4; --ok:#5FD39A; --ok-soft:#173A2C; --bad-soft:#3E1D24;
+  }
+}
+:root[data-theme="dark"]{
+  --navy:#E6ECF4; --red:#FF6B74; --grey:#A9B4C2; --panel:#17263C; --line:#2A3C57; --white:#0E1A2B; --link:#E6ECF4;
+  --footer-bg:#08111D; --footer-text:#E6ECF4; --ok:#5FD39A; --ok-soft:#173A2C; --bad-soft:#3E1D24;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -27,6 +39,35 @@ a:hover{color:var(--red)}
 .topbar .wrap{display:flex;align-items:center;gap:12px;height:64px;font-weight:700;font-size:16px;line-height:1.15}
 .topbar .mark{width:30px;height:30px;background:var(--red);border-radius:4px;flex:none}
 .topbar small{display:block;font-weight:400;color:var(--grey);font-size:13px}
+.theme-toggle{margin-left:auto;font:500 15px "Fira Sans",Helvetica,Arial,sans-serif;background:var(--panel);color:var(--navy);border:0;padding:8px 14px;cursor:pointer}
+.theme-toggle:hover{color:var(--red)}
+/* Practice quiz */
+.pq{background:var(--panel);padding:24px;margin:8px 0 36px;max-width:76ch}
+.pq-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:15px;color:var(--grey);margin-bottom:10px}
+.pq-top b{color:var(--navy)}
+.pq-bar{height:6px;background:var(--line);margin-bottom:20px}
+.pq-bar span{display:block;height:100%;width:0;background:var(--red);transition:width .4s ease}
+.pq-card{transition:opacity .35s ease, transform .35s ease}
+.pq-card.out{opacity:0;transform:translateY(-12px)}
+.pq-card.in{opacity:0;transform:translateY(12px)}
+.pq-q{font-size:21px;line-height:30px;font-weight:700;margin:0 0 16px}
+.pq-opts{display:grid;gap:10px}
+.pq-opt{text-align:left;font:inherit;font-size:17px;line-height:25px;color:var(--navy);background:var(--white);border:2px solid transparent;padding:12px 16px;cursor:pointer}
+.pq-opt:hover:not(:disabled){border-color:var(--navy)}
+.pq-opt:disabled{cursor:default}
+.pq-opt.correct{border-color:var(--ok);background:var(--ok-soft)}
+.pq-opt.wrong{border-color:var(--red);background:var(--bad-soft)}
+.pq-fb{margin-top:16px;padding:14px 16px;background:var(--white);font-size:17px;line-height:26px}
+.pq-fb[hidden]{display:none}
+.pq-fb .yay{display:inline-block;font-size:26px;font-weight:700;color:var(--ok);animation:pop .5s ease}
+.pq-fb .nope{font-weight:700;color:var(--red)}
+.pq-btn{font:700 16px "Fira Sans",Helvetica,Arial,sans-serif;background:var(--red);color:#fff;border:0;padding:11px 20px;cursor:pointer;margin-top:14px}
+.pq-btn:hover{filter:brightness(1.08)}
+.pq-end{text-align:center;padding:12px 0}
+.pq-end .big{font-size:40px;line-height:48px;font-weight:700;margin:6px 0}
+.pq-end .score{font-size:20px;margin:0 0 6px}
+@keyframes pop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.15);opacity:1}100%{transform:scale(1)}}
+@media (prefers-reduced-motion: reduce){.pq-card,.pq-bar span{transition:none}.pq-fb .yay{animation:none}}
 header.hero{background:var(--panel)}
 .hero .wrap{padding-top:48px;padding-bottom:44px}
 .eyebrow{font-weight:700;font-size:15px;color:var(--red);margin:0 0 12px}
@@ -100,8 +141,8 @@ dl.gloss dd{margin:0;font-size:17px;line-height:26px}
 ol.refs{font-size:16px;line-height:24px;max-width:none;padding-left:28px}
 ol.refs li{margin-bottom:10px;scroll-margin-top:16px}
 ol.refs li:target{background:var(--panel)}
-footer{background:var(--navy);color:var(--white);font-size:16px;line-height:24px;padding:32px 0 44px}
-footer a{color:var(--white)}
+footer{background:var(--footer-bg);color:var(--footer-text);font-size:16px;line-height:24px;padding:32px 0 44px}
+footer a{color:var(--footer-text)}
 @media (max-width:900px){
   .layout{grid-template-columns:minmax(0,1fr);gap:20px}
   nav.toc{position:static;max-height:none;background:var(--panel);padding:16px}
@@ -120,7 +161,7 @@ footer a{color:var(--white)}
 </head>
 <body>
 
-<div class="topbar"><div class="wrap"><span>University of Antwerp<small>Master of Epidemiology · Research Data Management</small></span></div></div>
+<div class="topbar"><div class="wrap"><span>University of Antwerp<small>Master of Epidemiology · Research Data Management</small></span><button class="theme-toggle" type="button" id="themeToggle" aria-label="Switch between light and dark mode">Dark mode</button></div></div>
 
 <header class="hero">
   <div class="wrap">
@@ -313,28 +354,28 @@ footer a{color:var(--white)}
         <path d="M712,84 L726,92 L712,100 z" fill="var(--line)"/>
         <g font-family="Fira Sans,Helvetica,Arial,sans-serif">
           <circle cx="110" cy="92" r="15" fill="var(--accent-2)"/>
-          <text x="110" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">1</text>
+          <text x="110" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="var(--white)">1</text>
           <text x="110" y="52" text-anchor="middle" font-size="12" fill="var(--muted)">Grant proposal</text>
           <text x="110" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">Application DMP</text>
           <text x="110" y="154" text-anchor="middle" font-size="12" fill="var(--muted)">a few short questions</text>
           <text x="110" y="171" text-anchor="middle" font-size="12" fill="var(--muted)">read by the review panel</text>
 
           <circle cx="290" cy="92" r="15" fill="var(--accent)"/>
-          <text x="290" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">2</text>
+          <text x="290" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="var(--white)">2</text>
           <text x="290" y="52" text-anchor="middle" font-size="12" fill="var(--muted)">≤ 6 months after start</text>
           <text x="290" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">Initial full DMP</text>
           <text x="290" y="154" text-anchor="middle" font-size="12" fill="var(--muted)">complete template</text>
           <text x="290" y="171" text-anchor="middle" font-size="12" fill="var(--muted)">sent to RDM team / funder</text>
 
           <circle cx="470" cy="92" r="15" fill="var(--accent)"/>
-          <text x="470" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">3</text>
+          <text x="470" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="var(--white)">3</text>
           <text x="470" y="52" text-anchor="middle" font-size="12" fill="var(--muted)">During the project</text>
           <text x="470" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">Updates</text>
           <text x="470" y="154" text-anchor="middle" font-size="12" fill="var(--muted)">whenever practice changes</text>
           <text x="470" y="171" text-anchor="middle" font-size="12" fill="var(--muted)">version number + date</text>
 
           <circle cx="650" cy="92" r="15" fill="var(--gold)"/>
-          <text x="650" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">4</text>
+          <text x="650" y="97" text-anchor="middle" font-size="13" font-weight="700" fill="var(--white)">4</text>
           <text x="650" y="52" text-anchor="middle" font-size="12" fill="var(--muted)">End of project</text>
           <text x="650" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">Final DMP</text>
           <text x="650" y="154" text-anchor="middle" font-size="12" fill="var(--muted)">what was actually done</text>
@@ -540,7 +581,19 @@ footer a{color:var(--white)}
   <!-- 13 -->
   <section id="quiz">
     <h2><span class="num">13</span>Check yourself</h2>
-    <p class="sub">Try to answer first, then open the answer.</p>
+    <p class="sub">A random practice quiz first, then a few open questions.</p>
+
+    <h3>Practice quiz: 20 random questions</h3>
+    <p>Each round draws 20 questions at random from a bank of 36, in a different order each time. If you get one wrong, you see the right answer and why straight away. Score 14 or more (70%) to pass.</p>
+    <div class="pq" id="pq" aria-live="polite">
+      <div class="pq-top"><span id="pqCount">Question 1 of 20</span><span>Score: <b id="pqScore">0</b></span></div>
+      <div class="pq-bar"><span id="pqBar"></span></div>
+      <div class="pq-card" id="pqCard"></div>
+      <noscript><p>The practice quiz needs JavaScript.</p></noscript>
+    </div>
+
+    <h3>Open questions</h3>
+    <p>Try to answer first, then open the answer.</p>
     <details><summary>1. Name the three things every DMP describes.</summary>
       <div class="ans"><p>The data you will collect or reuse; how you will handle them during the project; and how you will preserve and share them afterwards.<sup class="cite"><a href="#r1">[1]</a></sup></p></div></details>
     <details><summary>2. Why is a DMP called a "living document"?</summary>
@@ -620,6 +673,110 @@ footer a{color:var(--white)}
 
 <script>
 (function(){
+  // Light / dark mode (follows the system setting until the reader chooses)
+  var root=document.documentElement, tbtn=document.getElementById('themeToggle');
+  function isDark(){var t=root.getAttribute('data-theme'); return t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;}
+  function label(){tbtn.textContent=isDark()?'Light mode':'Dark mode';}
+  try{var saved=localStorage.getItem('dmp-theme'); if(saved) root.setAttribute('data-theme',saved);}catch(e){}
+  label();
+  tbtn.addEventListener('click',function(){
+    var next=isDark()?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('dmp-theme',next);}catch(e){}
+    label();
+  });
+  if(window.matchMedia){var mq=window.matchMedia('(prefers-color-scheme: dark)'); if(mq.addEventListener) mq.addEventListener('change',label);}
+
+  // Practice quiz. The first option of each question is the correct one; options are shuffled when shown.
+  var BANK=[
+    {q:"Which three things does every DMP describe?",o:["The data you collect or reuse, how you handle them during the project, and how you preserve and share them afterwards","The research question, the sample size and the statistical analysis","The budget, the timeline and the project partners","The ethics approval, the consent form and the protocol"],e:"UAntwerp defines a DMP by these three things: the data, their handling during the project, and their preservation and sharing afterwards."},
+    {q:"Why is a DMP called a “living document”?",o:["It is updated as the project develops, until it describes what was actually done","It is stored online and can be read by anyone","It must be signed again every year by the ethics committee","It is written by the whole research team at the same time"],e:"The first version states your intentions; updates follow changes in practice; the final version records what was done."},
+    {q:"An FWO project starts on 1 January. By when is the initial full DMP due?",o:["Within 6 months of the official start date (by 30 June)","Within 3 months of the start date","At the end of the first year","Only at the end of the project"],e:"FWO requires the initial full DMP within six months of the official start date."},
+    {q:"To whom do you submit the initial full DMP of an FWO project?",o:["The research coordination office of the main host institution (at UAntwerp, the RDM team)","Directly to FWO through the e-portal","The ethics committee","The journal where you will publish"],e:"The initial DMP goes to the host institution, not to FWO. FWO may still ask for it in a random check."},
+    {q:"What happens to the final DMP of an FWO project?",o:["It is attached to the final report and submitted through the FWO e-portal","It is published on DMPonline.be for everyone to read","It is sent to the data protection authority","Nothing: only the initial DMP counts"],e:"Without a detailed final DMP, FWO considers the final report incomplete."},
+    {q:"What does the FWO application form ask about data management?",o:["Six short DMP questions, several with a 700-character limit","A complete DMP of at least ten pages","Nothing: data management is only checked after funding","Only the name of the repository you will use"],e:"The application DMP is short; the evaluation panel and referees read the answers."},
+    {q:"For how long should FWO-funded researchers plan to preserve their data after the project?",o:["At least 5 years","At least 1 year","At least 25 years","Until the PhD is defended"],e:"FWO asks how data will be preserved during and at least five years after the research."},
+    {q:"At UAntwerp, when is the DMP due for BOF STIMPRO and KP projects?",o:["Within 3 months of the start","Within 6 months of the start","Within 12 months of the start","Only at the end of the project"],e:"GOA and DOCPRO projects have 6 months; STIMPRO and KP projects have 3 months."},
+    {q:"When must a Horizon Europe project deliver its DMP?",o:["Within the first 6 months, as a project deliverable","Before the proposal is submitted","Only at the end of the project","Horizon Europe does not require a DMP"],e:"Horizon Europe expects a DMP deliverable within the first six months and a final DMP at the end."},
+    {q:"“As open as possible, as closed as necessary” is a principle of…",o:["Horizon Europe (European Commission)","The GDPR","The Nagoya Protocol","DMPonline.be"],e:"It sums up the European Commission's position on research data: open by default, restricted when there is good reason."},
+    {q:"What does FAIR stand for?",o:["Findable, Accessible, Interoperable, Reusable","Free, Available, Indexed, Registered","Findable, Anonymous, Integrated, Reliable","Fair, Accurate, Independent, Reproducible"],e:"The FAIR principles were published by Wilkinson et al. in Scientific Data in 2016."},
+    {q:"Can sensitive health data be FAIR without being openly available?",o:["Yes: the metadata can be public with a DOI, while access to the data is restricted","No: FAIR data must always be open","No: health data can never be shared","Only if the data are published in a journal"],e:"FAIR is not the same as open. Restricted access with clear conditions can still be FAIR."},
+    {q:"Your dataset is pseudonymised. Does the GDPR still apply?",o:["Yes, because the data can be linked back to people with the key","No, pseudonymised data are anonymous","Only if the data leave the EU","Only for data collected after 2025"],e:"Pseudonymised data are still personal data. Only irreversibly anonymised data fall outside the GDPR."},
+    {q:"Under the GDPR, health data are…",o:["A special category of personal data (Art. 9)","Not personal data, if collected for research","Only protected when they include a name","Regulated only by the ethics committee"],e:"Health data need extra protection and a specific legal basis."},
+    {q:"What does DPIA stand for?",o:["Data Protection Impact Assessment","Data Processing and Information Agreement","Digital Preservation Impact Analysis","Data Publication and Indexing Approval"],e:"UAntwerp advises carrying out a DPIA at the start of a project that processes personal data (GDPR Art. 35)."},
+    {q:"Who runs DMPonline.be?",o:["Belnet","The FWO","The European Commission","KU Leuven"],e:"DMPonline.be is the Belgian instance of the DCC's DMPonline, run by Belnet."},
+    {q:"In which year was the DMPbelgium consortium founded?",o:["2017","2010","2020","2024"],e:"Founding members included Ghent University, INBO, UAntwerp, UHasselt, ULB, VUB and Sciensano."},
+    {q:"Which template has FWO used since 1 October 2022?",o:["The Flemish standard DMP template","The Horizon Europe template","The ERC template","The UK Data Service template"],e:"The Flemish standard template, maintained by the Flemish Research Data Network (FRDN), is also used for BOF, IOF and VLAIO."},
+    {q:"Which of these is NOT one of the six core DMP sections?",o:["Statistical analysis plan","Documentation and data quality","Storage and backup during the project","Data management responsibilities and resources"],e:"The statistical analysis plan belongs in the protocol. The six sections cover data, documentation, storage, legal and ethical issues, sharing and preservation, and responsibilities."},
+    {q:"A data transfer agreement with a partner site in Uganda belongs mainly in which DMP section?",o:["Legal and ethical requirements","Data description and collection","Documentation and data quality","Storage and backup"],e:"Agreements, GDPR transfer rules and local data protection law are legal issues; link to the sharing section if data move."},
+    {q:"Your REDCap data dictionary and cleaning log belong in which DMP section?",o:["Documentation and data quality","Legal and ethical requirements","Data sharing and long-term preservation","Responsibilities and resources"],e:"Codebooks, README files, metadata and quality checks are documentation."},
+    {q:"Who has access to the data, and how often are backups made? Which section answers this?",o:["Storage and backup during the project","Data description and collection","Data sharing and long-term preservation","Documentation and data quality"],e:"Storage, backup, access control and security during the project form one section."},
+    {q:"“Who takes over if the data manager leaves?” belongs in which section?",o:["Data management responsibilities and resources","Storage and backup during the project","Legal and ethical requirements","Data description and collection"],e:"Name the people, their tasks and their backups, plus the costs."},
+    {q:"Which stage comes first in the research data lifecycle?",o:["Plan","Collect","Process","Share"],e:"Plan comes before you collect a single data point; its output is your DMP."},
+    {q:"Which two things run through every stage of the data lifecycle?",o:["Documentation and security","Sharing and reuse","Cleaning and analysis","Publication and peer review"],e:"README files, metadata, access control and backups matter from the first questionnaire to the final deposit."},
+    {q:"Which of these is a persistent identifier for a dataset?",o:["A DOI","A file name","A REDCap record ID","A folder path on your laptop"],e:"A DOI keeps pointing to the dataset even if its web address changes. ORCID iDs do the same for people."},
+    {q:"Which email address reaches the UAntwerp RDM support team?",o:["rdm-support@uantwerpen.be","rdm@uhasselt.be","helpdesk@dmponline.be","privacy@fwo.be"],e:"rdm@uhasselt.be is the UHasselt RDM team."},
+    {q:"At UHasselt, do you need to send every intermediate DMP update to the RDM team?",o:["No: update the plan, but only the initial and final versions are submitted","Yes, every change must be approved","Only if the funder is Horizon Europe","Only for PhD students"],e:"UHasselt asks for an initial DMP within six months and the final DMP; updates do not need to be sent."},
+    {q:"Should a DMP contain your research data?",o:["No. A DMP describes the data and how they are handled, but never contains them","Yes, a small sample of the data","Yes, but only anonymised data","Only the participant list"],e:"UHasselt's guidance says this explicitly: the DMP is not a place to store data."},
+    {q:"How does UAntwerp treat the costs of data management?",o:["As normal research costs that belong in the project budget","As costs the university always pays","As costs that funders never accept","As optional extras for large projects only"],e:"Think of storage, software, encryption tools and data manager time; the UK Data Service costing tool helps estimate them."},
+    {q:"Where do KU Leuven researchers submit FWO and BOF DMPs?",o:["The DMP Monitoring Tool (DMP-MT)","By email to FWO","The ethics committee portal","They do not need to submit a DMP"],e:"The DMP-MT is managed by KU Leuven's Research Coordination Office."},
+    {q:"On an FWO project, who remains responsible for data management?",o:["The supervisor (and, since 2020, also fellowship holders)","The university's IT department","The RDM support team","The repository where the data are deposited"],e:"The RDM team advises, but responsibility stays with the researchers."},
+    {q:"The Nagoya Protocol matters for your DMP when…",o:["You acquire or use genetic resources from another country","You process personal data","You publish in an open-access journal","You use cloud storage"],e:"It covers access to genetic resources and the fair sharing of benefits (ABS)."},
+    {q:"Which DMP statement about storage is best?",o:["Data are stored on the UAntwerp network drive with daily backup; access is limited to four named team members","Data will be stored securely","Data will be stored on a laptop and on a USB stick","Data storage will be decided later"],e:"Be specific: name the system, the backup, the people and the numbers."},
+    {q:"A question in the template does not apply to your study. What should you do?",o:["Write “not applicable” and briefly say why","Leave it empty","Copy the guidance text into the answer","Delete the question from the template"],e:"Reviewers need to see that you considered the question."},
+    {q:"Which file format is best for long-term preservation of a tabular dataset?",o:["CSV (an open, non-proprietary format)","An old .xls file","A screenshot of the spreadsheet","A password-protected Word file"],e:"Open, stable formats such as CSV, PDF/A or TIFF stay readable for a long time."}
+  ];
+  var ROUND=20, PASS=14;
+  var card=document.getElementById('pqCard'), countEl=document.getElementById('pqCount'), scoreEl=document.getElementById('pqScore'), bar=document.getElementById('pqBar');
+  var deck=[], idx=0, score=0;
+  function shuffle(a){a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t;} return a;}
+  function esc(s){var d=document.createElement('div'); d.textContent=s; return d.innerHTML;}
+  function swap(render){
+    card.classList.add('out');
+    setTimeout(function(){render(); card.classList.remove('out'); card.classList.add('in'); void card.offsetWidth; card.classList.remove('in');},350);
+  }
+  function start(){deck=shuffle(BANK).slice(0,ROUND); idx=0; score=0; scoreEl.textContent='0'; swap(show);}
+  function show(){
+    var item=deck[idx], correct=item.o[0], opts=shuffle(item.o);
+    countEl.textContent='Question '+(idx+1)+' of '+ROUND;
+    bar.style.width=(idx/ROUND*100)+'%';
+    var h='<p class="pq-q">'+esc(item.q)+'</p><div class="pq-opts">';
+    opts.forEach(function(o){h+='<button type="button" class="pq-opt">'+esc(o)+'</button>';});
+    h+='</div><div class="pq-fb" hidden></div>';
+    card.innerHTML=h;
+    var fb=card.querySelector('.pq-fb'), btns=[].slice.call(card.querySelectorAll('.pq-opt'));
+    btns.forEach(function(b,i){
+      b.addEventListener('click',function(){
+        btns.forEach(function(x){x.disabled=true;});
+        var ok=opts[i]===correct;
+        btns.forEach(function(x,k){if(opts[k]===correct) x.classList.add('correct');});
+        if(ok){
+          score++; scoreEl.textContent=score; b.classList.add('correct');
+          fb.innerHTML='<span class="yay">Hooray! 🎉</span><br>'+esc(item.e);
+          fb.hidden=false;
+          setTimeout(next,2200);
+        }else{
+          b.classList.add('wrong');
+          fb.innerHTML='<span class="nope">Not quite.</span> The correct answer is: <b>'+esc(correct)+'</b><br>'+esc(item.e)+'<br><button type="button" class="pq-btn">Next question</button>';
+          fb.hidden=false;
+          fb.querySelector('.pq-btn').addEventListener('click',next);
+        }
+      });
+    });
+  }
+  function next(){idx++; if(idx<ROUND) swap(show); else swap(end);}
+  function end(){
+    bar.style.width='100%'; countEl.textContent='Round complete';
+    var passed=score>=PASS;
+    card.innerHTML='<div class="pq-end">'+
+      (passed?'<p class="big" style="color:var(--ok)">Hooray! 🎉 You passed</p>':'<p class="big" style="color:var(--red)">Keep practising</p>')+
+      '<p class="score">You scored <b>'+score+' out of '+ROUND+'</b>'+(passed?'.':'. You need '+PASS+' to pass.')+'</p>'+
+      '<p>'+(passed?'Try another round: you will get a new mix of questions.':'Reread the sections you found difficult, then try a new round.')+'</p>'+
+      '<button type="button" class="pq-btn" id="pqAgain">Start a new round</button></div>';
+    document.getElementById('pqAgain').addEventListener('click',start);
+  }
+  if(card){deck=shuffle(BANK).slice(0,ROUND); show();}
+
   // Checklist persistence
   document.querySelectorAll('#checklist input').forEach(function(cb){
     try{cb.checked=localStorage.getItem('dmp-'+cb.id)==='1';}catch(e){}
